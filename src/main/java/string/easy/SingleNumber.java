@@ -12,21 +12,19 @@ import java.util.Optional;
 public class SingleNumber {
 
     public int singleNumber(int[] nums) {
-        Map<Integer, Integer> storage = new HashMap<>();
+        Map<Integer, Boolean> storage = new HashMap<>();
 
         for (int i : nums) {
             if (storage.get(i) != null) {
-                int counter = storage.get(i);
-                counter++;
-                storage.put(i, counter);
+                storage.put(i, Boolean.FALSE);
             } else {
-                storage.put(i, 1);
+                storage.put(i, Boolean.TRUE);
             }
         }
 
         Optional<Integer> result = storage.entrySet()
             .stream()
-            .filter(entry -> Objects.equals(entry.getValue(), 1))
+            .filter(entry -> Objects.equals(entry.getValue(), Boolean.TRUE))
             .map(Map.Entry::getKey)
             .findAny();
 
