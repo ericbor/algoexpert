@@ -7,16 +7,14 @@ public class RichestCustomerWealth {
     public int maximumWealth(int[][] accounts) {
         int wealth = Integer.MIN_VALUE;
 
-        int result = 0;
-        for (int i = 0; i < accounts.length; i++) {
-            for (int k = 0; k < accounts[i].length; k++) {
-                result += accounts[i][k];
-                if (k == accounts[i].length - 1) {
-                    if (result > wealth) {
-                        wealth = result;
-                    }
-                    result = 0;
-                }
+        for (int[] account : accounts) {
+            int result = 0;
+            for (int i : account) {
+                result += i;
+            }
+
+            if (result > wealth) {
+                wealth = result;
             }
         }
 
