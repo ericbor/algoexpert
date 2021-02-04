@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -12,22 +11,24 @@ import java.util.Queue;
 import java.util.TreeMap;
 
 //https://leetcode.com/problems/high-five/
-public class HighFive {
+public class HighFive2 {
     private static final Integer MAX_ELEMENTS = 5;
 
     public int[][] highFive(int[][] items) {
+
         //we need orderred map - output scores should be in sorted order
         Map<Integer, Queue<Integer>> allScores = new TreeMap<>();
         for (int[] item : items) {
             int studentId = item[0];
             int score = item[1];
             if (!allScores.containsKey(studentId)) {
-                //The elements of the priority queue are ordered according to the natural ordering, or by a Comparator provided
-                //max heap - poll the highes number first
-                //allScores.put(id, new PriorityQueue<>((a,b) -> b - a));
-                allScores.put(studentId, new PriorityQueue<>(5, Collections.reverseOrder()));
+                allScores.put(studentId, new PriorityQueue<>());
             }
             allScores.get(studentId).add(score);
+
+            if (allScores.get(studentId).size() > MAX_ELEMENTS) {
+                allScores.get(studentId).poll();
+            }
         }
 
         List<int[]> solution = new ArrayList<>();
@@ -40,9 +41,8 @@ public class HighFive {
             solution.add(new int[] { studentId, sum / MAX_ELEMENTS });
         }
 
-        int[][] solutionArray = new int[solution.size()][];
-
-        return solution.toArray(solutionArray);
+        //int[][] solutionArray = new int[solution.size()][];
+        return solution.toArray(new int[solution.size()][]);
     }
 
     @Test
