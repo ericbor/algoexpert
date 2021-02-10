@@ -20,6 +20,10 @@ public class RemoveDuplicatesInString {
         return sb.toString();
     }
 
+    private void foo() {
+
+    }
+
     @Test
     public void verify() {
         Assert.assertEquals("ca", removeDuplicates("abbaca"));
