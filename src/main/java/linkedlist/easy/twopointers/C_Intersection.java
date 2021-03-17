@@ -1,9 +1,9 @@
-package linkedlist.easy;
+package linkedlist.easy.twopointers;
 
 import linkedlist.design.ListNode;
 
 //https://leetcode.com/problems/intersection-of-two-linked-lists/
-public class Intersection {
+public class C_Intersection {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode p1 = headA;
         ListNode p2 = headB;

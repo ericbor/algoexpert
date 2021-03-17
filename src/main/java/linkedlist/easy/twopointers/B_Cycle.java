@@ -1,9 +1,9 @@
-package linkedlist.easy;
+package linkedlist.easy.twopointers;
 
 import linkedlist.design.ListNode;
 
 //https://leetcode.com/problems/linked-list-cycle-ii/
-public class Cycle2 {
+public class B_Cycle {
     public ListNode detectCycle(ListNode head) {
         if(head == null){
             return null;

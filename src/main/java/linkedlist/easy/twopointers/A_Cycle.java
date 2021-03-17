@@ -1,10 +1,10 @@
-package linkedlist.easy;
+package linkedlist.easy.twopointers;
 
 import linkedlist.design.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Cycle {
+public class A_Cycle {
     public boolean hasCycle(ListNode head) {
         if (head == null) {
             return false;
