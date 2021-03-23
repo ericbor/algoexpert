@@ -2,121 +2,90 @@ package linkedlist.design;
 
 //https://leetcode.com/problems/design-linked-list
 public class DoublyLinkedList {
-    int size;
+
     DoubleNode head;//sentinel node as pseudo-head
-    DoubleNode tail;
 
     public DoublyLinkedList() {
-        size = 0;
-        head = new DoubleNode(0);
-        tail = new DoubleNode(0);
-        head.next = tail;
-        tail.previous = head;
+        this.head = null;
     }
 
     //Get value at index
     public int get(int index) {
-        if (index < 0 || index >= size) {
-            return -1;
-        }
-
-        DoubleNode current = head;
-        if (index <= size - index) {
-            for (int i = 0; i <= index; i++) {
-                current = current.next;
-            }
-        } else {
-            current = tail;
-            for (int i = 0; i < size - index; i++) {
-                current = current.previous;
-            }
-        }
-
-        return current.value;
+        DoubleNode cur = getNode(index);
+        return cur == null ? -1 : cur.value;
     }
 
     public void addAtHead(int value) {
-        DoubleNode predecessor = head;
-        DoubleNode successor = head.next;
-
-        size++;
-        DoubleNode toAdd = new DoubleNode(value);
-        toAdd.previous = predecessor;
-        toAdd.next = successor;
-        predecessor.next = toAdd;
-        successor.previous = toAdd;
+        DoubleNode cur = new DoubleNode(value);
+        cur.next = head;
+        if (head != null) {
+            head.previous = cur;
+        }
+        head = cur;
     }
 
     public void addAtTail(int value) {
-        DoubleNode successor = tail;
-        DoubleNode predecessor = tail.previous;
-
-        size++;
-        DoubleNode toAdd = new DoubleNode(value);
-        toAdd.previous = predecessor;
-        toAdd.next = successor;
-        predecessor.next = toAdd;
-        successor.previous = toAdd;
+        if (head == null) {
+            addAtHead(value);
+            return;
+        }
+        DoubleNode prev = getTail();
+        DoubleNode cur = new DoubleNode(value);
+        prev.next = cur;
+        cur.previous = prev;
     }
 
     public void addAtIndex(int index, int value) {
-        if (index > size) {
+        if (index == 0) {
+            addAtHead(value);
             return;
         }
-
-        //if index is negative - insert at the head of list
-        if (index < 0) {
-            index = 0;
+        DoubleNode prev = getNode(index - 1);
+        if (prev == null) {
+            return;
         }
-
-        DoubleNode predecessor;
-        DoubleNode successor;
-        if (index < size - index) {
-            predecessor = head;
-            for (int i = 0; i < index; i++) {
-                predecessor = predecessor.next;
-            }
-            successor = predecessor.next;
-        } else {
-            successor = tail;
-            for (int i = 0; i < size - index; i++) {
-                successor = successor.previous;
-            }
-            predecessor = successor.previous;
+        DoubleNode cur = new DoubleNode(value);
+        DoubleNode next = prev.next;
+        cur.previous = prev;
+        cur.next = next;
+        prev.next = cur;
+        if (next != null) {
+            next.previous = cur;
         }
-
-        size++;
-
-        DoubleNode toAdd = new DoubleNode(value);
-        toAdd.previous = predecessor;
-        toAdd.next = successor;
-        predecessor.next = toAdd;
-        successor.previous = toAdd;
     }
 
     public void deleteAtIndex(int index) {
-        if (index < 0 || index >= size) {
+        DoubleNode cur = getNode(index);
+        if (cur == null) {
             return;
         }
-
-        DoubleNode predecessor;
-        DoubleNode successor;
-        if (index < size - index) {
-            predecessor = head;
-            for (int i = 0; i < index; i++) {
-                predecessor = predecessor.next;
-            }
-            successor = predecessor.next.next;
+        DoubleNode prev = cur.previous;
+        DoubleNode next = cur.next;
+        if (prev != null) {
+            prev.next = next;
         } else {
-            successor = tail;
-            for (int i = 0; i < size - index; i++) {
-                successor = successor.previous;
-            }
-            predecessor = successor.previous.previous;
+            // modify head when deleting the first node.
+            head = next;
         }
+        if (next != null) {
+            next.previous = prev;
+        }
+    }
 
-        size--;
-        predecessor.next = successor;
-        successor.previous = predecessor;
+    /** Helper function to return the index-th node in the linked list. */
+    private DoubleNode getNode(int index) {
+        DoubleNode cur = head;
+        for (int i = 0; i < index && cur != null; ++i) {
+            cur = cur.next;
+        }
+        return cur;
+    }
+    /** Helper function to return the last node in the linked list. */
+    private DoubleNode getTail() {
+        DoubleNode cur = head;
+        while (cur != null && cur.next != null) {
+            cur = cur.next;
+        }
+        return cur;
     }
 }

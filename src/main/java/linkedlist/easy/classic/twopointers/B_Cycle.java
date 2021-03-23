@@ -1,4 +1,4 @@
-package linkedlist.easy.twopointers;
+package linkedlist.easy.classic.twopointers;
 
 import linkedlist.design.ListNode;
 

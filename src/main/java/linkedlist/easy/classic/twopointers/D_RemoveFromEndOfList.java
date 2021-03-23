@@ -1,7 +1,6 @@
-package linkedlist.easy.twopointers;
+package linkedlist.easy.classic.twopointers;
 
 import linkedlist.design.ListNode;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
