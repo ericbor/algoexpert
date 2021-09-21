@@ -5,8 +5,15 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+/*
+Given a string with lowercase letters only, if you are allowed to replace no more than ‘k’ letters with any letter, find the length of the longest substring having the same letters after replacement.
 
-//https://www.educative.io/courses/grokking-the-coding-interview/R8DVgjq78yR
+Input: String="aabccbb", k=2 ... Output: 5
+Explanation: Replace the two 'c' with 'b' to have a longest repeating substring "bbbbb".
+
+Input: String="abccde", k=1 ... Output: 3
+Explanation: Replace the 'b' or 'd' with 'c' to have the longest repeating substring "ccc".
+ */
 public class CharacterReplacement {
     public static int findLength(String str, int k) {
         int windowStart = 0;
