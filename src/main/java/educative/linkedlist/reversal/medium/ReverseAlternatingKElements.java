@@ -4,7 +4,9 @@ import linkedlist.design.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ReverseEveryKElements {
+//https://www.educative.io/courses/grokking-the-coding-interview/q2lZKgLm980
+public class ReverseAlternatingKElements {
+
     public static ListNode reverse(ListNode head, int k) {
         if (k <= 1 || head == null) {
             return head;
@@ -13,8 +15,7 @@ public class ReverseEveryKElements {
         ListNode curr = head;
         ListNode prev = null;
         while (curr != null) {// break if we've reached the end of the list
-            ListNode connection = prev;
-            // after reversing the LinkedList 'current' will become the last node of the sub-list
+            ListNode con = prev;
             ListNode tail = curr;
             int j = k;
             while (j > 0 && curr != null) {
@@ -26,17 +27,22 @@ public class ReverseEveryKElements {
             }
 
             // connect with the previous part
-            if (connection != null) {
-                connection.next = prev; // 'previous' is now the first node of the sub-list
-            } else { // this means we are changing the first node (head) of the LinkedList
+            if (con != null) {
+                con.next = prev;
+            } else {
                 head = prev;
             }
             // connect with the next part
             tail.next = curr;
 
-            // prepare for the next sub-list
-            prev = tail;
+            int i = k;
+            while (i > 0 && curr != null) {
+                prev = curr;
+                curr = curr.next;
+                i--;
+            }
         }
+
         return head;
     }
 
@@ -51,15 +57,15 @@ public class ReverseEveryKElements {
         head.next.next.next.next.next.next = new ListNode(7);
         head.next.next.next.next.next.next.next = new ListNode(8);
 
-        ListNode result = reverse(head, 3);
-        Assert.assertEquals(3, result.value);
-        Assert.assertEquals(2, result.next.value);
-        Assert.assertEquals(1, result.next.next.value);
-        Assert.assertEquals(6, result.next.next.next.value);
-        Assert.assertEquals(5, result.next.next.next.next.value);
-        Assert.assertEquals(4, result.next.next.next.next.next.value);
-        Assert.assertEquals(8, result.next.next.next.next.next.next.value);
-        Assert.assertEquals(7, result.next.next.next.next.next.next.next.value);
+        ListNode result = reverse(head, 2);
+        Assert.assertEquals(2, result.value);
+        Assert.assertEquals(1, result.next.value);
+        Assert.assertEquals(3, result.next.next.value);
+        Assert.assertEquals(4, result.next.next.next.value);
+        Assert.assertEquals(6, result.next.next.next.next.value);
+        Assert.assertEquals(5, result.next.next.next.next.next.value);
+        Assert.assertEquals(7, result.next.next.next.next.next.next.value);
+        Assert.assertEquals(8, result.next.next.next.next.next.next.next.value);
         Assert.assertNull(result.next.next.next.next.next.next.next.next);
     }
 }

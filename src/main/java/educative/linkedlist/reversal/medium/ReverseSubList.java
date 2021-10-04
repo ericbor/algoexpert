@@ -75,13 +75,13 @@ public class ReverseSubList {
             end--;
         }
 
-        // Adjust the final connections as explained in the algorithm
+        // connect with the previous part
         if (con != null) {
             con.next = prev;
         } else {
             head = prev;
         }
-
+        // connect with the next part
         tail.next = cur;
         return head;
 

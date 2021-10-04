@@ -17,7 +17,7 @@ public class ReverseFirstHalf {
         ListNode prev = null;
 
         // The two pointers that will fix the final connections.
-        ListNode con = prev; //
+        //ListNode con = prev; //
         ListNode tail = cur;// 1(tail) -> 2 -> 3 -> 4 -> 5 -> null
 
         // Iteratively reverse the nodes until n becomes 0.
