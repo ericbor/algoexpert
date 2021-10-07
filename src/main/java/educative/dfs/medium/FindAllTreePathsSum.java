@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 //https://www.educative.io/courses/grokking-the-coding-interview/B815A0y2Ajn
-public class FindAllTreePaths {
-    public static List<List<Integer>> findPaths(TreeNode root) {
+public class FindAllTreePathsSum {
+    public static List<List<Integer>> findPaths(TreeNode root, int sum) {
         List<List<Integer>> allPaths = new ArrayList<>();
         List<Integer> currentPath = new ArrayList<>();
-        findPathsRecursive(root, currentPath, allPaths);
+        findPathsRecursive(root, sum, currentPath, allPaths);
         return allPaths;
     }
 
-    private static void findPathsRecursive(TreeNode currentNode, List<Integer> currentPath, List<List<Integer>> allPaths) {
+    private static void findPathsRecursive(TreeNode currentNode, int sum, List<Integer> currentPath, List<List<Integer>> allPaths) {
         if (currentNode == null) {
             return;
         }
@@ -24,13 +24,13 @@ public class FindAllTreePaths {
         currentPath.add(currentNode.val);
 
         // if the current node is a leaf and its value is equal to sum, save the current path
-        if (currentNode.left == null && currentNode.right == null) {
+        if (currentNode.val == sum && currentNode.left == null && currentNode.right == null) {
             allPaths.add(new ArrayList<>(currentPath));
         } else {
             // traverse the left sub-tree
-            findPathsRecursive(currentNode.left , currentPath, allPaths);
+            findPathsRecursive(currentNode.left, sum - currentNode.val, currentPath, allPaths);
             // traverse the right sub-tree
-            findPathsRecursive(currentNode.right, currentPath, allPaths);
+            findPathsRecursive(currentNode.right, sum - currentNode.val, currentPath, allPaths);
         }
 
         // remove the current node from the path to backtrack,
@@ -46,6 +46,6 @@ public class FindAllTreePaths {
         root.left.left = new TreeNode(4);
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
-        Assert.assertEquals(List.of(List.of(12, 7, 4), List.of(12, 1, 10), List.of(12, 1, 5)), findPaths(root));
+        Assert.assertEquals(List.of(List.of(12, 7, 4), List.of(12, 1, 10)), findPaths(root, 23));
     }
 }
