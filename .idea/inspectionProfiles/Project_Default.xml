@@ -560,7 +560,7 @@
       <option name="insideTryAllowed" value="false" />
     </inspection_tool>
     <inspection_tool class="CharUsedInArithmeticContext" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="CharacterComparison" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CharacterComparison" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="CheckDtdRefs" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CheckEmptyScriptTag" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CheckForOutOfMemoryOnLargeArrayAllocation" enabled="true" level="ERROR" enabled_by_default="true">
@@ -849,9 +849,6 @@
     <inspection_tool class="DollarSignInName" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DontUsePairConstructor" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DoubleBraceInitialization" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="DoubleCheckedLocking" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ignoreOnVolatileVariables" value="false" />
-    </inspection_tool>
     <inspection_tool class="DoubleLiteralMayBeFloatLiteral" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="DoubleNegation" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="DriverManagerGetConnection" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -863,11 +860,7 @@
     </inspection_tool>
     <inspection_tool class="DuplicateConditionJS" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="DuplicatePropertyInspection" enabled="true" level="ERROR" enabled_by_default="true">
-      <option name="CURRENT_FILE" value="true" />
-      <option name="MODULE_WITH_DEPENDENCIES" value="false" />
       <option name="CHECK_DUPLICATE_VALUES" value="false" />
-      <option name="CHECK_DUPLICATE_KEYS" value="true" />
-      <option name="CHECK_DUPLICATE_KEYS_WITH_DIFFERENT_VALUES" value="true" />
     </inspection_tool>
     <inspection_tool class="DuplicateStringLiteralInspection" enabled="false" level="ERROR" enabled_by_default="false">
       <option name="MIN_STRING_LENGTH" value="5" />
@@ -924,7 +917,6 @@
     <inspection_tool class="EmptyEventHandler" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="EmptyFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EmptyFinallyBlockJS" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="EmptyInitializer" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="EmptyMethod" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="EXCLUDE_ANNOS">
         <value>
@@ -940,7 +932,6 @@
     <inspection_tool class="EmptyStatementBodyJS" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="m_reportEmptyBlocks" value="false" />
     </inspection_tool>
-    <inspection_tool class="EmptySynchronizedStatement" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="EmptyTryBlock" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EmptyTryBlockJS" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EmptyWebServiceClass" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -1023,7 +1014,6 @@
     <inspection_tool class="FileEqualsUsage" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="FinalClass" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="FinalMethod" enabled="false" level="ERROR" enabled_by_default="false" />
-    <inspection_tool class="FinalMethodInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FinalPrivateMethod" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="FinalStaticMethod" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="Finalize" enabled="true" level="ERROR" enabled_by_default="true">
@@ -1470,7 +1460,6 @@
     <inspection_tool class="InstanceofInterfaces" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="InstanceofThis" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="InstantiatingObjectToGetClassObject" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="InstantiationOfUtilityClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IntLiteralMayBeLongLiteral" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="IntegerDivisionInFloatingPointContext" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="IntegerMultiplicationImplicitCastToLong" enabled="true" level="ERROR" enabled_by_default="true">
@@ -1498,7 +1487,6 @@
     <inspection_tool class="InvalidImplementedBy" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="InvalidProvidedBy" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="InvalidRequestParameters" enabled="false" level="ERROR" enabled_by_default="false" />
-    <inspection_tool class="IteratorHasNextCallsIteratorNext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IteratorNextDoesNotThrowNoSuchElementException" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="JBoss" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="JDBCExecuteWithNonConstantString" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -2113,7 +2101,6 @@
     <inspection_tool class="PostfixTemplateDescriptionNotFound" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PresentationAnnotation" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="PrimitiveArrayArgumentToVariableArgMethod" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="PrivateMemberAccessBetweenOuterAndInnerClass" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="PrivatePropertyName" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ProblematicVarargsMethodOverride" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ProblematicWhitespace" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -2125,7 +2112,6 @@
       <option name="ignoreEnums" value="false" />
       <option name="ignoreInterfaces" value="false" />
     </inspection_tool>
-    <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PsiElementConcatenation" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PublicConstructor" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="PublicConstructorInNonPublicClass" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -2655,7 +2641,6 @@
     <inspection_tool class="SystemGetenv" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="SystemOutErr" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="SystemProperties" enabled="false" level="ERROR" enabled_by_default="false" />
-    <inspection_tool class="SystemRunFinalizersOnExit" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SystemSetSecurityManager" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="TaglibDomModelInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TailRecursion" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -2686,7 +2671,6 @@
     <inspection_tool class="ThreadPriority" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ThreadStartInConstruction" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ThreadStopSuspendResume" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ThreadWithDefaultRunMethod" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ThreadYield" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ThreeNegationsPerFunctionJS" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ThreeNegationsPerMethod" enabled="false" level="ERROR" enabled_by_default="false">
@@ -2975,7 +2959,6 @@
     <inspection_tool class="WaitNotInLoop" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="WaitNotInSynchronizedContext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="WaitOrAwaitWithoutTimeout" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="WaitWhileHoldingTwoLocks" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="WaitWithoutCorrespondingNotify" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="WeakerAccess" enabled="false" level="WARNING" enabled_by_default="false">
       <scope name="Production" level="WARNING" enabled="true">
