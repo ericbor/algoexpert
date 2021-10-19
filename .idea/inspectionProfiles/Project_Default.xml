@@ -2206,7 +2206,7 @@
     <inspection_tool class="ReplaceAllDot" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ReplaceArrayEqualityOpWithArraysEquals" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ReplaceArrayOfWithLiteral" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
-    <inspection_tool class="ReplaceAssignmentWithOperatorAssignment" enabled="true" level="ERROR" enabled_by_default="true">
+    <inspection_tool class="ReplaceAssignmentWithOperatorAssignment" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreLazyOperators" value="true" />
       <option name="ignoreObscureOperators" value="false" />
     </inspection_tool>
