@@ -28,6 +28,7 @@ public class SortedArraySquares {
         return squares;
     }
 
+
     @Test
     public void verify() {
         Assert.assertArrayEquals(new int[] { 1, 1, 4, 4, 9 }, makeSquares(new int[] { -2, -1, 1, 2, 3 }));
