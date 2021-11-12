@@ -39,6 +39,26 @@ public class SymmetricTree {
         return true;
     }
 
+    public boolean isSymmetricRec(TreeNode root) {
+
+        return isMirror(root.left, root.right);
+    }
+
+    private boolean isMirror(TreeNode currLeft, TreeNode currRight) {
+
+        if (currLeft == null && currRight == null) {
+            return true;
+        }
+        if (currLeft == null || currRight == null) {
+            return false;
+        }
+        if (currLeft.val != currRight.val) {
+            return false;
+        }
+
+        return isMirror(currLeft.left, currRight.right) && isMirror(currLeft.right, currRight.left);
+    }
+
     @Test
     public void test() {
         TreeNode root = new TreeNode(9);
@@ -51,7 +71,8 @@ public class SymmetricTree {
         root.left.right.right = new TreeNode(13);
         root.right.left.right = new TreeNode(13);
 
-        Assert.assertFalse(isSymmetric(root));
+        //Assert.assertFalse(isSymmetric(root));
+        Assert.assertFalse(isSymmetricRec(root));
     }
 
     @Test
@@ -63,7 +84,8 @@ public class SymmetricTree {
         root.left.right = new TreeNode(4);
         root.right.left = new TreeNode(4);
         root.right.right = new TreeNode(3);
-        Assert.assertTrue(isSymmetric(root));
+        //Assert.assertTrue(isSymmetric(root));
+        Assert.assertTrue(isSymmetricRec(root));
     }
 
     @Test
@@ -73,12 +95,14 @@ public class SymmetricTree {
         root.right = new TreeNode(2);
         root.left.right = new TreeNode(3);
         root.right.right = new TreeNode(3);
-        Assert.assertFalse(isSymmetric(root));
+        //Assert.assertFalse(isSymmetric(root));
+        Assert.assertFalse(isSymmetricRec(root));
     }
 
     @Test
     public void test4() {
         TreeNode root = new TreeNode(1);
-        Assert.assertTrue(isSymmetric(root));
+        //Assert.assertTrue(isSymmetric(root));
+        Assert.assertTrue(isSymmetricRec(root));
     }
 }
