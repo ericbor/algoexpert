@@ -23,18 +23,28 @@ public class TreeDiameter {
 
         // if the current node doesn't have a left or right subtree, we can't have
         // a path passing through it, since we need a leaf node on each side
-        if (leftHeight != 0 && rightHeight != 0) {
+        //if (leftHeight != 0 && rightHeight != 0) {
             // diameter at the current node will be equal to the height of left subtree +
             // the height of right sub-trees + '1' for the current node
-            int diameter = leftHeight + rightHeight + 1;
+            //int diameter = leftHeight + rightHeight;
 
             // update the global tree diameter
-            treeDiameter = Math.max(treeDiameter, diameter);
-        }
+            treeDiameter = Math.max(treeDiameter,  leftHeight + rightHeight);
+
 
         // height of the current node will be equal to the maximum of the heights of
         // left or right subtrees plus '1' for the current node
         return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    @Test
+    public void test() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3 );
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        Assert.assertEquals(3, findDiameter(root));
     }
 
     @Test
