@@ -10,18 +10,18 @@ import java.util.Map;
 public class MinCostClimbingStairs {
 
     public int minCostClimbingStairs2(int[] cost) {
-        int[] minCost = new int[cost.length + 1];
+        int[] dp = new int[cost.length + 1];
 
         // Start iteration from step 2, since the minimum cost of reaching step 0 and step 1 is 0
-        for (int i = 2; i < minCost.length; i++) {
-            int takeOneStep = minCost[i - 1] + cost[i - 1];
-            int takeTwoSteps = minCost[i - 2] + cost[i - 2];
+        for (int i = 2; i < dp.length; i++) {
+            int takeOneStep = dp[i - 1] + cost[i - 1];
+            int takeTwoSteps = dp[i - 2] + cost[i - 2];
 
-            minCost[i] = Math.min(takeOneStep, takeTwoSteps);
+            dp[i] = Math.min(takeOneStep, takeTwoSteps);
         }
 
         // The final element in minimumCost refers to the top floor
-        return minCost[minCost.length - 1];
+        return dp[dp.length - 1];
     }
 
     private final Map<Integer, Integer> memo = new HashMap<>();
