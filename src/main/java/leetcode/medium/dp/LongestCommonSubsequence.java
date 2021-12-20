@@ -7,26 +7,20 @@ import org.junit.Test;
 public class LongestCommonSubsequence {
     public int longestCommonSubsequence(String text1, String text2) {
 
-        int[][] dpGrid = new int[text1.length() + 1][text2.length() + 1];
+        int[][] dp = new int[text1.length() + 1][text2.length() + 1];
 
-        // Iterate up each column, starting from the last one.
-        for (int col = text2.length() - 1; col >= 0; col--) {
-            char t2 = text2.charAt(col);
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 1; col < dp[0].length; col++) {
 
-            for (int row = text1.length() - 1; row >= 0; row--) {
-                // If the corresponding characters for this cell are the same...
-                char t1 = text1.charAt(row);
-
-                if (t1 == t2) {
-                    dpGrid[row][col] = 1 + dpGrid[row + 1][col + 1];
+                if (text1.charAt(row - 1) == text2.charAt(col - 1)) {
+                    dp[row][col] = 1 + dp[row - 1][col - 1];
                 } else {
-                    // Otherwise, they must be different...
-                    dpGrid[row][col] = Math.max(dpGrid[row + 1][col], dpGrid[row][col + 1]);
+                    dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]);
                 }
             }
         }
 
-        return dpGrid[0][0];
+        return dp[text1.length()][text2.length()];
     }
 
     @Test
