@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 public class SubtractNode extends OperandNode {
     public SubtractNode(Node left, Node right) {

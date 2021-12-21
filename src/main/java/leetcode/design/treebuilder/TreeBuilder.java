@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 import org.junit.Assert;
 import org.junit.Test;

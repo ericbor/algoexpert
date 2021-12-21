@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 public class AddNode extends OperandNode {
     public AddNode(Node left, Node right) {

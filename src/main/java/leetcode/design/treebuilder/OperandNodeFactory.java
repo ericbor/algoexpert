@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 public final class OperandNodeFactory {
     private OperandNodeFactory() {

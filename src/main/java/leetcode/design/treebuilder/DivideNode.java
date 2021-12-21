@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 public class DivideNode extends OperandNode {
     public DivideNode(Node left, Node right) {

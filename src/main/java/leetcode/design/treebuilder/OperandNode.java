@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 public abstract class OperandNode extends Node{
     protected final Node leftNode;

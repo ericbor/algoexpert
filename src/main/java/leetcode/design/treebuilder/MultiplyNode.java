@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.design.treebuilder;
 
 public class MultiplyNode extends OperandNode {
     public MultiplyNode(Node left, Node right) {
