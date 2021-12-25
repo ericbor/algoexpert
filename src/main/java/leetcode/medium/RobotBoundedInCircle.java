@@ -10,35 +10,29 @@ import java.util.Map;
 public class RobotBoundedInCircle {
     public boolean isRobotBounded(String instructions) {
 
-        Map<String, String> directions = new HashMap<>();
-        directions.put("NN", "north");
-        directions.put("NL", "east");
-        directions.put("NR", "west");
-        directions.put("LL", "south");
-        directions.put("LR", "north");
-        directions.put("RR", "south");
-        directions.put("RL", "north");
+        // north = 0, east = 1, south = 2, west = 3
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        // Initial position is in the center
+        int x = 0;
+        int y = 0;
+        // facing north
+        int idx = 0;
 
-        int distance = 0;
-        StringBuilder sb = new StringBuilder("N");
-        String lastDirection = "";
-        for(char c: instructions.toCharArray()) {
-            if(c == 'G') {
-                sb.append(sb.substring(sb.length() - 1));
+        for (char c : instructions.toCharArray()) {
+            if (c == 'L') {
+                idx = (idx + 3) % 4;
+            } else if (c == 'R') {
+                idx = (idx + 1) % 4;
             } else {
-                sb.append(c);
-            }
-
-            lastDirection = sb.substring(sb.length() - 2);
-            if("north".equals(directions.get(lastDirection))) {
-                distance++;
-            } else if("south".equals(directions.get(lastDirection))) {
-                distance--;
+                x += directions[idx][0];
+                y += directions[idx][1];
             }
         }
 
-        return !"north".equals(directions.get(lastDirection)) || distance <= 0;
-
+        // after one cycle:
+        // robot returns into initial position
+        // or robot doesn't face north
+        return (x == 0 && y == 0) || (idx != 0);
     }
 
     @Test
