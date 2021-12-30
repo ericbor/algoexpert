@@ -57,48 +57,6 @@ public class WordSearch {
         return false;
     }
 
-    private boolean wordExists(char[][] board, String word, int row, int col) {
-
-        LinkedList<String> coordinates = new LinkedList<>();
-        coordinates.add(String.valueOf(row) + col);
-
-        Queue<WordCoordinate> queue = new LinkedList<>();
-        queue.add(new WordCoordinate(String.valueOf(board[row][col]), coordinates));
-
-        int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-
-        while (!queue.isEmpty()) {
-            WordCoordinate current = queue.poll();
-            String lastWord = current.word;
-
-            if (lastWord.contains(word)) {
-                return true;
-            }
-
-            LinkedList<String> currCoordinates = current.coordinates;
-            String lastCoordinate = currCoordinates.getLast();
-            int lastRow = (int) lastCoordinate.charAt(0) - (int) '0';
-            int lastCol = (int) lastCoordinate.charAt(1) - (int) '0';
-
-            for (int[] direction : directions) {
-                int r = lastRow + direction[0];
-                int c = lastCol + direction[1];
-
-                if (r >= 0 && c >= 0 && r < board.length && c < board.length) {
-                    String newCoordinate = String.valueOf(r) + c;
-                    if (!currCoordinates.contains(newCoordinate)) {
-                        LinkedList<String> newCoordiantes = new LinkedList<>(currCoordinates);
-                        newCoordiantes.add(newCoordinate);
-                        queue.add(new WordCoordinate(lastWord + board[r][c], newCoordiantes));
-                    }
-
-                }
-            }
-        }
-
-        return false;
-    }
-
     class WordCoordinate {
         String word;
         LinkedList<String> coordinates;
@@ -111,7 +69,7 @@ public class WordSearch {
 
     @Test
     public void test() {
-        Assert.assertTrue(exist(new char[][] { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } }, "ABCCED"));
+        Assert.assertFalse(exist(new char[][] { { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' } }, "AAAAAAAAAAAAAAB"));
     }
 
     @Test
@@ -122,5 +80,10 @@ public class WordSearch {
     @Test
     public void test3() {
         Assert.assertFalse(exist(new char[][] { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } }, "ABCB"));
+    }
+
+    @Test
+    public void test4() {
+        Assert.assertTrue(exist(new char[][] { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } }, "ABCCED"));
     }
 }
