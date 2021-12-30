@@ -13,32 +13,12 @@ public class MedianFinder {
     }
 
     public void addNum(int num) {
-        if (minHeap.isEmpty()) {
-            minHeap.add(num);
-        } else if (maxHeap.isEmpty()) {
-            if (num <= minHeap.peek()) {
-                maxHeap.add(num);
-            } else {
-                int tmp = minHeap.poll();
-                minHeap.add(num);
-                maxHeap.add(tmp);
-            }
-        } else if (minHeap.size() == maxHeap.size()) {
-            if (num < maxHeap.peek()) {
-                int tmp = maxHeap.poll();
-                maxHeap.add(num);
-                minHeap.add(tmp);
-            } else if (num >= maxHeap.peek()) {
-                minHeap.add(num);
-            }
+        if (minHeap.size() == maxHeap.size()) {
+            maxHeap.add(num);
+            minHeap.add(maxHeap.poll());
         } else {
-            if (num <= maxHeap.peek() || num < minHeap.peek()) {
-                maxHeap.add(num);
-            } else {
-                int tmp = minHeap.poll();
-                minHeap.add(num);
-                maxHeap.add(tmp);
-            }
+            minHeap.add(num);
+            maxHeap.add(minHeap.poll());
         }
     }
 
