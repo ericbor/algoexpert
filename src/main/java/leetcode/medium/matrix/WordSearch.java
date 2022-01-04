@@ -13,40 +13,39 @@ public class WordSearch {
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[0].length; col++) {
                 if (word.charAt(0) == board[row][col]) {
-                    LinkedList<String> coordinates = new LinkedList<>();
-                    coordinates.add(String.valueOf(row) + col);
+                    boolean[][] visited = new boolean[board.length][board[0].length];
+                    visited[row][col] = true;
 
                     Queue<WordCoordinate> queue = new LinkedList<>();
-                    queue.add(new WordCoordinate(String.valueOf(board[row][col]), coordinates));
+                    queue.add(new WordCoordinate(new int[]{row, col}, 1));
 
                     int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
                     while (!queue.isEmpty()) {
                         WordCoordinate current = queue.poll();
-                        String lastWord = current.word;
+                        int lastRow = current.lastCoordinate[0];
+                        int lastCol = current.lastCoordinate[1];
+                        int currLength = current.currentLength;
 
-                        if (lastWord.equals(word)) {
+                        if(currLength > word.length()) {
+                            continue;
+                        }
+                        if(currLength == word.length()) {
                             return true;
                         }
 
-                        LinkedList<String> currCoordinates = current.coordinates;
-                        String lastCoordinate = currCoordinates.getLast();
-                        int lastRow = (int) lastCoordinate.charAt(0) - (int) '0';
-                        int lastCol = (int) lastCoordinate.charAt(1) - (int) '0';
-                        int currLength = lastWord.length();
-                        char nextLetter = word.charAt(currLength);
+                        char nextLetter = word.charAt(current.currentLength);
 
                         for (int[] direction : directions) {
                             int r = lastRow + direction[0];
                             int c = lastCol + direction[1];
 
-                            if (r >= 0 && c >= 0 && r < board.length && c < board[0].length && board[r][c] == nextLetter) {
-                                String newCoordinate = String.valueOf(r) + c;
-                                if (!currCoordinates.contains(newCoordinate)) {
-                                    LinkedList<String> newCoordiantes = new LinkedList<>(currCoordinates);
-                                    newCoordiantes.add(newCoordinate);
-                                    queue.add(new WordCoordinate(lastWord + board[r][c], newCoordiantes));
+                            if (r >= 0 && c >= 0 && r < board.length && c < board[0].length && !visited[r][c] && board[r][c] == nextLetter) {
+                                if(currLength == word.length() - 1) {
+                                    return true;
                                 }
+                                visited[r][c] = true;
+                                queue.add(new WordCoordinate(new int[]{r, c}, current.currentLength + 1));
                             }
                         }
                     }
@@ -58,18 +57,18 @@ public class WordSearch {
     }
 
     class WordCoordinate {
-        String word;
-        LinkedList<String> coordinates;
+        int currentLength;
+        int[] lastCoordinate;
 
-        WordCoordinate(String word, LinkedList<String> coordinates) {
-            this.word = word;
-            this.coordinates = coordinates;
+        WordCoordinate(int[] lastCoordinate, int currentLength) {
+            this.currentLength = currentLength;
+            this.lastCoordinate = lastCoordinate;
         }
     }
 
     @Test
     public void test() {
-        Assert.assertFalse(exist(new char[][] { { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' } }, "AAAAAAAAAAAAAAB"));
+        Assert.assertTrue(exist(new char[][] { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'E', 'S' }, { 'A', 'D', 'E', 'E' } }, "ABCESEEEFS"));
     }
 
     @Test
@@ -85,5 +84,15 @@ public class WordSearch {
     @Test
     public void test4() {
         Assert.assertTrue(exist(new char[][] { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } }, "ABCCED"));
+    }
+
+    @Test
+    public void test5() {
+        Assert.assertFalse(exist(new char[][] { { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' }, { 'A', 'A', 'A', 'A', 'A', 'A' } }, "AAAAAAAAAAAAAAB"));
+    }
+
+    @Test
+    public void test6() {
+        Assert.assertTrue(exist(new char[][] { { 'a' } }, "a"));
     }
 }
