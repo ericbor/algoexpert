@@ -1,5 +1,8 @@
 package leetcode.graph;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,40 +12,57 @@ import java.util.Queue;
 
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        Map<Integer, List<Integer>> graph = new HashMap<>();
+        Map<Integer, List<Integer>> map = new HashMap<>();
 
-        for (int i = 0; i < numCourses; i++) {
-            graph.put(i, new ArrayList<>());
-        }
-
-        int[] degree = new int[numCourses];
+        int[] indegree = new int[numCourses];
         for (int[] prerequisite : prerequisites) {
-            degree[prerequisite[1]]++;
-            graph.get(prerequisite[0]).add(prerequisite[1]);
+
+            List<Integer> courseList = map.getOrDefault(prerequisite[0], new ArrayList<>());
+            courseList.add(prerequisite[1]);
+            map.put(prerequisite[0], courseList);
+
+            indegree[prerequisite[1]]++;
         }
 
         Queue<Integer> queue = new LinkedList<>();
-        int count = 0;
-        for (int i = 0; i < degree.length; i++) {
-            if (degree[i] == 0) {
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
                 queue.add(i);
-                count++;
             }
         }
 
+        int count = numCourses;
         while (!queue.isEmpty()) {
-            int course = queue.poll();
-            for (int i = 0; i < graph.get(course).size(); i++) {
-                int pointer = graph.get(course).get(i);
-                degree[pointer]--;
-                if (degree[pointer] == 0) {
-                    queue.add(pointer);
-                    count++;
+            int current = queue.poll();
+            if (map.containsKey(current)) {
+                List<Integer> coursePrerequisites = map.get(current);
+                for (int i : coursePrerequisites) {
+                    indegree[i]--;
+                    if (indegree[i] == 0) {
+                        queue.add(i);
+                    }
                 }
             }
+
+            count--;
         }
 
-        return count == numCourses;
+        return count == 0;
+    }
+
+    @Test
+    public void test() {
+        Assert.assertTrue(canFinish(5, new int[][] { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 3, 4 } }));
+    }
+
+    @Test
+    public void test3() {
+        Assert.assertTrue(canFinish(2, new int[][] { { 1, 0 } }));
+    }
+
+    @Test
+    public void test2() {
+        Assert.assertFalse(canFinish(2, new int[][] { { 1, 0 }, { 0, 1 } }));
     }
 
 }
