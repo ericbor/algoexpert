@@ -3,51 +3,56 @@ package leetcode.graph;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 //https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/
 public class ReorderRoutesToMakeAllPathsLeadToCityZero {
-    private final Map<Integer, List<Integer>> incoming = new HashMap<>();
-    private final Map<Integer, List<Integer>> outgoing = new HashMap<>();
-    private final Set<Integer> visited = new HashSet<>();
-    int ans;
-
     public int minReorder(int n, int[][] connections) {
-        ans = 0;
-
-        for (int i = 0; i < n; i++) {
-            incoming.put(i, new ArrayList<>());
-            outgoing.put(i, new ArrayList<>());
+        Set<String> edgeDirection = new HashSet<>();
+        Map<Integer, Set<Integer>> graph = new HashMap<>();
+        for (int[] connection : connections) {
+            int source = connection[0];
+            int destination = connection[1];
+            //storing the direction as "source,destination"
+            String edge = source + "," + destination;
+            edgeDirection.add(edge);
+            graph.computeIfAbsent(source, k -> new HashSet<>());
+            graph.computeIfAbsent(destination, k -> new HashSet<>());
+            graph.get(source).add(destination);
+            graph.get(destination).add(source);
         }
 
-        for (int[] edge : connections) {
-            incoming.get(edge[1]).add(edge[0]);
-            outgoing.get(edge[0]).add(edge[1]);
-        }
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
 
-        dfs(0);
-        return ans;
-    }
+        boolean[] visited = new boolean[n];
+        visited[0] = true;
 
-    private void dfs(int v) {
-        visited.add(v);
-        for (int i : outgoing.get(v)) {
-            if (!visited.contains(i)) {
-                ans++;
-                dfs(i);
+        int count = 0;
+        while (!queue.isEmpty()) {
+            int connection = queue.poll();
+
+            for (int neighbor : graph.get(connection)) {
+
+                if (visited[neighbor]) {
+                    continue;
+                }
+                //else set visited to true.
+                visited[neighbor] = true;
+                //e.g. If neighbor does not point to 0 direction
+                if (!edgeDirection.contains(neighbor + "," + connection)) {
+                    count++;
+                }
+                queue.add(neighbor);
             }
         }
 
-        for (int i : incoming.get(v)) {
-            if (!visited.contains(i)) {
-                dfs(i);
-            }
-        }
+        return count;
     }
 
     @Test
