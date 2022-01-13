@@ -13,8 +13,8 @@ public class DiameterOfBinaryTree {
     private List<Integer> maxPath = new ArrayList<>();
 
     public int diameterOfBinaryTree(TreeNode root) {
-        List<TreeNode> path = new ArrayList<>();
-        path.add(root);
+        List<Integer> path = new ArrayList<>();
+        path.add(root.val);
 
         collectPaths(root, path);
 
@@ -27,7 +27,7 @@ public class DiameterOfBinaryTree {
         }
 
         // add this node to the parent
-        parentPath.add(node);
+        parentPath.add(node.val);
 
         // start a new path from this node
         List<Integer> path = new ArrayList<>();
