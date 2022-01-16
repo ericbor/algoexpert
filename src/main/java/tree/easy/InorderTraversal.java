@@ -4,8 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,22 +24,22 @@ public class InorderTraversal {
      *
      * */
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> output = new ArrayList<>();
-        LinkedList<TreeNode> stack = new LinkedList<>();
+        List<Integer> values = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
 
-        TreeNode current = root;
-        while (current != null || !stack.isEmpty()) {
-            while (current != null) {
-                stack.add(current);
-                current = current.left;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
             }
 
-            current = stack.pollLast();
-            output.add(current.val);
-            current = current.right;
+            root = stack.pop();
+            values.add(root.val);
+
+            root = root.right;
         }
 
-        return output;
+        return values;
     }
 
     public List<Integer> inorderTraversal_Recursive(TreeNode root) {

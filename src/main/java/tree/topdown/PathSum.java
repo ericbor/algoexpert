@@ -4,42 +4,54 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class PathSum {
-    public boolean hasPathSum2(TreeNode root, int sum) {
-        if (root == null) {
-            return false;
-        }
 
-        sum -= root.val;
-        if (root.left == null && root.right == null) {
-            return sum == 0;
-        }
-
-        boolean leftCheck = hasPathSum(root.left, sum);
-        boolean rightCheck = hasPathSum(root.right, sum);
-
-        return leftCheck || rightCheck;
-    }
-
-    public boolean hasPathSum(TreeNode root, int targetSum) {
+    public boolean hasPathSum_DFS(TreeNode root, int targetSum) {
         return dfs(root, targetSum, 0);
     }
 
     private boolean dfs(TreeNode node, int targetSum, int currentSum) {
-        if(node == null) {
+        if (node == null) {
             return false;
         }
 
         currentSum += node.val;
 
-        if(node.left == null && node.right == null) {
-                return currentSum == targetSum;
+        if (node.left == null && node.right == null) {
+            return currentSum == targetSum;
         }
 
         boolean inLeft = dfs(node.left, targetSum, currentSum);
         boolean inRight = dfs(node.right, targetSum, currentSum);
 
         return inLeft || inRight;
+    }
+
+    public boolean hasPathSum(TreeNode root, int sum) {
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.push(root);
+
+        while (!stack.isEmpty() && root != null) {
+            TreeNode cur = stack.pop();
+            if (cur.left == null && cur.right == null) {
+                if (cur.val == sum) {
+                    return true;
+                }
+            }
+            if (cur.right != null) {
+                cur.right.val = cur.val + cur.right.val;
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                cur.left.val = cur.val + cur.left.val;
+                stack.push(cur.left);
+            }
+        }
+
+        return false;
     }
 
     @Test
@@ -56,7 +68,6 @@ public class PathSum {
 
         Assert.assertTrue(hasPathSum(root, 22));
     }
-
 
     @Test
     public void test2() {
