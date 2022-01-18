@@ -4,12 +4,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class SerializeAndDeserializeBinaryTree {
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public String serialize_2(TreeNode root) {
         if(root == null) {
             return "";
         }
@@ -33,7 +34,7 @@ public class SerializeAndDeserializeBinaryTree {
     }
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public TreeNode deserialize_2(String data) {
         if(data.isEmpty()) {
             return null;
         }
@@ -61,6 +62,40 @@ public class SerializeAndDeserializeBinaryTree {
             i++;
         }
 
+        return root;
+    }
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        serialize(root, sb);
+        return sb.toString();
+    }
+
+    private void serialize(TreeNode root, StringBuilder sb) {
+        if (root == null) {
+            sb.append("#").append(",");
+        } else {
+            sb.append(root.val).append(",");
+            serialize(root.left, sb);
+            serialize(root.right, sb);
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Queue<String> q = new LinkedList<>(Arrays.asList(data.split(",")));
+        return deserialize(q);
+    }
+
+    private TreeNode deserialize(Queue<String> q) {
+        String s = q.poll();
+        if ("#".equals(s)) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.parseInt(s));
+        root.left = deserialize(q);
+        root.right = deserialize(q);
         return root;
     }
 
