@@ -75,7 +75,7 @@ public class IntersectionOfTwoLinkedLists {
         headB.next.next = new ListNode(1);
         headB.next.next.next = headA.next.next;
 
-        Assert.assertEquals(8, getIntersectionNode(headA, headB).value);
+        Assert.assertEquals(8, getIntersectionNode(headA, headB).val);
     }
 
     @Test
@@ -91,6 +91,6 @@ public class IntersectionOfTwoLinkedLists {
         headB.next.next = new ListNode(1);
         headB.next.next.next = headA.next.next;
 
-        Assert.assertEquals(8, getIntersectionNode2(headA, headB).value);
+        Assert.assertEquals(8, getIntersectionNode2(headA, headB).val);
     }
 }

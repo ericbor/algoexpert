@@ -8,7 +8,7 @@ import org.junit.Test;
 public class DeleteNode {
     public void deleteNode(ListNode node) {
         if(node != null && node.next != null){
-            node.value = node.next.value;
+            node.val = node.next.val;
             node.next = node.next.next;
         }
     }
@@ -23,10 +23,10 @@ public class DeleteNode {
 
         deleteNode(head.next.next);
 
-        Assert.assertEquals(1, head.value);
-        Assert.assertEquals(2, head.next.value);
-        Assert.assertEquals(4, head.next.next.value);
-        Assert.assertEquals(5, head.next.next.next.value);
+        Assert.assertEquals(1, head.val);
+        Assert.assertEquals(2, head.next.val);
+        Assert.assertEquals(4, head.next.next.val);
+        Assert.assertEquals(5, head.next.next.next.val);
         Assert.assertNull(head.next.next.next.next);
     }
 }

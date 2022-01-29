@@ -66,11 +66,11 @@ public class RearrangeList {
         head.next.next.next.next.next = new ListNode(12);
 
         reorder(head);
-        Assert.assertEquals(2, head.value);
-        Assert.assertEquals(12, head.next.value);
-        Assert.assertEquals(4, head.next.next.value);
-        Assert.assertEquals(10, head.next.next.next.value);
-        Assert.assertEquals(6, head.next.next.next.next.value);
-        Assert.assertEquals(8, head.next.next.next.next.next.value);
+        Assert.assertEquals(2, head.val);
+        Assert.assertEquals(12, head.next.val);
+        Assert.assertEquals(4, head.next.next.val);
+        Assert.assertEquals(10, head.next.next.next.val);
+        Assert.assertEquals(6, head.next.next.next.next.val);
+        Assert.assertEquals(8, head.next.next.next.next.next.val);
     }
 }

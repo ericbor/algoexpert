@@ -3,51 +3,18 @@ package leetcode.medium.matrix;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 //https://leetcode.com/problems/word-search/
 public class WordSearch {
+    private boolean[][] visited;
+
     public boolean exist(char[][] board, String word) {
+        visited = new boolean[board.length][board[0].length];
 
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[0].length; col++) {
                 if (word.charAt(0) == board[row][col]) {
-                    boolean[][] visited = new boolean[board.length][board[0].length];
-                    visited[row][col] = true;
-
-                    Queue<WordCoordinate> queue = new LinkedList<>();
-                    queue.add(new WordCoordinate(new int[]{row, col}, 1));
-
-                    int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-
-                    while (!queue.isEmpty()) {
-                        WordCoordinate current = queue.poll();
-                        int lastRow = current.lastCoordinate[0];
-                        int lastCol = current.lastCoordinate[1];
-                        int currLength = current.currentLength;
-
-                        if(currLength > word.length()) {
-                            continue;
-                        }
-                        if(currLength == word.length()) {
-                            return true;
-                        }
-
-                        char nextLetter = word.charAt(current.currentLength);
-
-                        for (int[] direction : directions) {
-                            int r = lastRow + direction[0];
-                            int c = lastCol + direction[1];
-
-                            if (r >= 0 && c >= 0 && r < board.length && c < board[0].length && !visited[r][c] && board[r][c] == nextLetter) {
-                                if(currLength == word.length() - 1) {
-                                    return true;
-                                }
-                                visited[r][c] = true;
-                                queue.add(new WordCoordinate(new int[]{r, c}, current.currentLength + 1));
-                            }
-                        }
+                    if(search(row, col, board, word, 0)) {
+                        return true;
                     }
                 }
             }
@@ -56,14 +23,25 @@ public class WordSearch {
         return false;
     }
 
-    class WordCoordinate {
-        int currentLength;
-        int[] lastCoordinate;
-
-        WordCoordinate(int[] lastCoordinate, int currentLength) {
-            this.currentLength = currentLength;
-            this.lastCoordinate = lastCoordinate;
+    private boolean search(int row, int col, char[][] board, String word, int index) {
+        if (index == word.length()) {
+            return true;
         }
+
+        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || visited[row][col] || board[row][col] != word.charAt(index)) {
+            return false;
+        }
+
+        visited[row][col] = true;
+        if (search(row + 1, col, board, word, index + 1) ||
+            search(row, col + 1, board, word, index + 1) ||
+            search(row - 1, col, board, word, index + 1) ||
+            search(row, col - 1, board, word, index + 1)) {
+            return true;
+        }
+
+        visited[row][col] = false;
+        return false;
     }
 
     @Test

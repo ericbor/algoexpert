@@ -96,11 +96,11 @@ public class ReverseSubList {
         head.next.next.next.next = new ListNode(5);
 
         ListNode result = reverse2(head, 2, 4);
-        Assert.assertEquals(1, result.value);
-        Assert.assertEquals(4, result.next.value);
-        Assert.assertEquals(3, result.next.next.value);
-        Assert.assertEquals(2, result.next.next.next.value);
-        Assert.assertEquals(5, result.next.next.next.next.value);
+        Assert.assertEquals(1, result.val);
+        Assert.assertEquals(4, result.next.val);
+        Assert.assertEquals(3, result.next.next.val);
+        Assert.assertEquals(2, result.next.next.next.val);
+        Assert.assertEquals(5, result.next.next.next.next.val);
         Assert.assertNull(result.next.next.next.next.next);
     }
 }

@@ -13,7 +13,7 @@ public class MergeTwoSortedLists {
 
         ListNode current = dummy;
         while (l1 != null && l2 != null) {
-            if (l1.value <= l2.value) {
+            if (l1.val <= l2.val) {
                 current.next = l1;
                 l1 = l1.next;
             } else {
@@ -35,7 +35,7 @@ public class MergeTwoSortedLists {
             return l2;
         } else if (l2 == null) {
             return l1;
-        } else if (l1.value < l2.value) {
+        } else if (l1.val < l2.val) {
             l1.next = mergeTwoListsRecyrsive(l1.next, l2);
             return l1;
         } else {
@@ -55,11 +55,11 @@ public class MergeTwoSortedLists {
         l2.next.next = new ListNode(6);
 
         ListNode result = mergeTwoLists(l1, l2);
-        assertEquals(1, result.value);
-        assertEquals(2, result.next.value);
-        assertEquals(3, result.next.next.value);
-        assertEquals(4, result.next.next.next.value);
-        assertEquals(5, result.next.next.next.next.value);
-        assertEquals(6, result.next.next.next.next.next.value);
+        assertEquals(1, result.val);
+        assertEquals(2, result.next.val);
+        assertEquals(3, result.next.next.val);
+        assertEquals(4, result.next.next.next.val);
+        assertEquals(5, result.next.next.next.next.val);
+        assertEquals(6, result.next.next.next.next.next.val);
     }
 }

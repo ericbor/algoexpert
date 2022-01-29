@@ -18,7 +18,7 @@ Output: [1, 5, 7, 8, 9]
  */
 public class MergeKSortedLists {
     public static ListNode merge(ListNode[] lists) {
-        Queue<ListNode> minHeap = new PriorityQueue<>((n1, n2) -> n1.value - n2.value);
+        Queue<ListNode> minHeap = new PriorityQueue<>((n1, n2) -> n1.val - n2.val);
 
         // put the root of each list in the min heap
         for (ListNode root : lists) {
@@ -64,15 +64,15 @@ public class MergeKSortedLists {
         l3.next.next = new ListNode(4);
 
         ListNode result = merge(new ListNode[] { l1, l2, l3 });
-        Assert.assertEquals(1, result.value);
-        Assert.assertEquals(2, result.next.value);
-        Assert.assertEquals(3, result.next.next.value);
-        Assert.assertEquals(3, result.next.next.next.value);
-        Assert.assertEquals(4, result.next.next.next.next.value);
-        Assert.assertEquals(6, result.next.next.next.next.next.value);
-        Assert.assertEquals(6, result.next.next.next.next.next.next.value);
-        Assert.assertEquals(7, result.next.next.next.next.next.next.next.value);
-        Assert.assertEquals(8, result.next.next.next.next.next.next.next.next.value);
+        Assert.assertEquals(1, result.val);
+        Assert.assertEquals(2, result.next.val);
+        Assert.assertEquals(3, result.next.next.val);
+        Assert.assertEquals(3, result.next.next.next.val);
+        Assert.assertEquals(4, result.next.next.next.next.val);
+        Assert.assertEquals(6, result.next.next.next.next.next.val);
+        Assert.assertEquals(6, result.next.next.next.next.next.next.val);
+        Assert.assertEquals(7, result.next.next.next.next.next.next.next.val);
+        Assert.assertEquals(8, result.next.next.next.next.next.next.next.next.val);
         Assert.assertNull(result.next.next.next.next.next.next.next.next.next);
     }
 }

@@ -11,12 +11,12 @@ public class PalindromeLinkedList {
         ListNode firstHalfEnd = endOfFirstHalf(head);
         ListNode secondHalfStart = reverse(firstHalfEnd.next);
 
-        // Check whether or not there is a palindrome.
+        // Check whether there is a palindrome.
         ListNode p1 = head;
         ListNode p2 = secondHalfStart;
         boolean result = true;
         while (result && p2 != null) {
-            if (p1.value != p2.value) {
+            if (p1.val != p2.val) {
                 result = false;
             }
             p1 = p1.next;

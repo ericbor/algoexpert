@@ -14,7 +14,7 @@ public class RemoveElements {
         ListNode previous = dummy;
         ListNode current = head;
         while (current != null) {
-            if (current.value == val) {
+            if (current.val == val) {
                 previous.next = current.next;
             } else {
                 previous = current;
@@ -34,8 +34,8 @@ public class RemoveElements {
         head.next.next.next.next = new ListNode(5);
 
         ListNode result = removeElements(head, 2);
-        assertEquals(1, result.value);
-        assertEquals(3, result.next.value);
-        assertEquals(5, result.next.next.value);
+        assertEquals(1, result.val);
+        assertEquals(3, result.next.val);
+        assertEquals(5, result.next.next.val);
     }
 }

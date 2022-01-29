@@ -20,7 +20,7 @@ public class PrintImmutableLinkedListInReverse {
 
         List<Integer> results = new ArrayList<>();
         while (!stack.isEmpty()) {
-            results.add(stack.pop().value);
+            results.add(stack.pop().val);
         }
 
         return results;
@@ -39,7 +39,7 @@ public class PrintImmutableLinkedListInReverse {
         }
 
         helper(node.next, results);
-        results.add(node.value);
+        results.add(node.val);
     }
 
 

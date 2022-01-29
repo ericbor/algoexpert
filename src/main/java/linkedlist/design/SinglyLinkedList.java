@@ -21,7 +21,7 @@ public class SinglyLinkedList {
             current = current.next;
         }
 
-        return current.value;
+        return current.val;
     }
 
     public void addAtHead(int value) {

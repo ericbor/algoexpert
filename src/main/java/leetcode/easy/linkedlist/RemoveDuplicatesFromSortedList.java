@@ -12,7 +12,7 @@ public class RemoveDuplicatesFromSortedList {
 
         while (curr != null) {
 
-            if (prev != null && prev.value == curr.value) {
+            if (prev != null && prev.val == curr.val) {
                 ListNode nextTmp = curr.next;
                 curr = prev;
                 curr.next = nextTmp;
@@ -34,9 +34,9 @@ public class RemoveDuplicatesFromSortedList {
         head.next.next.next.next = new ListNode(3);
 
         ListNode result = deleteDuplicates(head);
-        Assert.assertEquals(1, result.value);
-        Assert.assertEquals(2, result.next.value);
-        Assert.assertEquals(3, result.next.next.value);
+        Assert.assertEquals(1, result.val);
+        Assert.assertEquals(2, result.next.val);
+        Assert.assertEquals(3, result.next.next.val);
         Assert.assertNull(result.next.next.next);
     }
 }

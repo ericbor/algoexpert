@@ -47,11 +47,13 @@ public class CountBinarySubstrings {
     @Test
     public void test() {
         Assert.assertEquals(6, countBinarySubstrings("00110011"));
+        Assert.assertEquals(6, countBinarySubstrings2("00110011"));
     }
 
     @Test
     public void test2() {
         Assert.assertEquals(4, countBinarySubstrings("10101"));
+        Assert.assertEquals(4, countBinarySubstrings2("10101"));
     }
 
     @Test

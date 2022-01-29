@@ -34,10 +34,10 @@ public class ReverseLinkedList {
         head.next.next.next.next = new ListNode(5);
 
         ListNode result = reverseList(head);
-        assertEquals(5, result.value);
-        assertEquals(4, result.next.value);
-        assertEquals(3, result.next.next.value);
-        assertEquals(2, result.next.next.next.value);
-        assertEquals(1, result.next.next.next.next.value);
+        assertEquals(5, result.val);
+        assertEquals(4, result.next.val);
+        assertEquals(3, result.next.next.val);
+        assertEquals(2, result.next.next.next.val);
+        assertEquals(1, result.next.next.next.next.val);
     }
 }

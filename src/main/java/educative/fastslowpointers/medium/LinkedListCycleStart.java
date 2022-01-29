@@ -69,12 +69,12 @@ public class LinkedListCycleStart {
         head.next.next.next.next.next = new ListNode(6);
 
         head.next.next.next.next.next.next = head.next.next;
-        Assert.assertEquals(3, findCycleStart(head).value);
+        Assert.assertEquals(3, findCycleStart(head).val);
 
         head.next.next.next.next.next.next = head.next.next.next;
-        Assert.assertEquals(4, findCycleStart(head).value);
+        Assert.assertEquals(4, findCycleStart(head).val);
 
         head.next.next.next.next.next.next = head;
-        Assert.assertEquals(1, findCycleStart(head).value);
+        Assert.assertEquals(1, findCycleStart(head).val);
     }
 }

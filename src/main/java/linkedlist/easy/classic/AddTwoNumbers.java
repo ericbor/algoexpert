@@ -13,8 +13,8 @@ public class AddTwoNumbers {
         int carry = 0;
 
         while (l1 != null || l2 != null) {
-            int x = l1 != null ? l1.value : 0;
-            int y = l2 != null ? l2.value : 0;
+            int x = l1 != null ? l1.val : 0;
+            int y = l2 != null ? l2.val : 0;
             int sum = carry + x + y;
             carry = sum / 10;
 
@@ -47,8 +47,8 @@ public class AddTwoNumbers {
         l2.next.next = new ListNode(4);
 
         ListNode result = addTwoNumbers(l1, l2);
-        assertEquals(7, result.value);
-        assertEquals(0, result.next.value);
-        assertEquals(8, result.next.next.value);
+        assertEquals(7, result.val);
+        assertEquals(0, result.next.val);
+        assertEquals(8, result.next.next.val);
     }
 }

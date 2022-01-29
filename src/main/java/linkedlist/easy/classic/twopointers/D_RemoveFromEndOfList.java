@@ -63,10 +63,10 @@ public class D_RemoveFromEndOfList {
         head.next.next.next.next = new ListNode(5);
 
         ListNode result = removeNthFromEnd(head, 2);
-        assertEquals(1, result.value);
-        assertEquals(2, result.next.value);
-        assertEquals(3, result.next.next.value);
-        assertEquals(5, result.next.next.next.value);
+        assertEquals(1, result.val);
+        assertEquals(2, result.next.val);
+        assertEquals(3, result.next.next.val);
+        assertEquals(5, result.next.next.next.val);
     }
 
     @Test
@@ -78,9 +78,9 @@ public class D_RemoveFromEndOfList {
         head.next.next.next.next = new ListNode(5);
 
         ListNode resultOnePass = removeNthFromEnd_OnePass(head, 2);
-        assertEquals(1, resultOnePass.value);
-        assertEquals(2, resultOnePass.next.value);
-        assertEquals(3, resultOnePass.next.next.value);
-        assertEquals(5, resultOnePass.next.next.next.value);
+        assertEquals(1, resultOnePass.val);
+        assertEquals(2, resultOnePass.next.val);
+        assertEquals(3, resultOnePass.next.next.val);
+        assertEquals(5, resultOnePass.next.next.next.val);
     }
 }

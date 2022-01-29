@@ -32,7 +32,7 @@ public class MiddleOfLinkedList {
         node.next.next.next.next.next = new ListNode(6);
 
         ListNode middle = middleNode(node);
-        Assert.assertEquals(4, middle.value);
+        Assert.assertEquals(4, middle.val);
     }
 
     @Test
@@ -44,6 +44,6 @@ public class MiddleOfLinkedList {
         node.next.next.next.next = new ListNode(5);
 
         ListNode middle = middleNode(node);
-        Assert.assertEquals(3, middle.value);
+        Assert.assertEquals(3, middle.val);
     }
 }

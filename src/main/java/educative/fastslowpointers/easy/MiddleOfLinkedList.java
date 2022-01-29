@@ -52,15 +52,15 @@ public class MiddleOfLinkedList {
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
-        Assert.assertEquals(3, findMiddle(head).value);
-        Assert.assertEquals(3, findMiddle2(head).value);
+        Assert.assertEquals(3, findMiddle(head).val);
+        Assert.assertEquals(3, findMiddle2(head).val);
 
         head.next.next.next.next.next = new ListNode(6);
-        Assert.assertEquals(4, findMiddle(head).value);
-        Assert.assertEquals(4, findMiddle2(head).value);
+        Assert.assertEquals(4, findMiddle(head).val);
+        Assert.assertEquals(4, findMiddle2(head).val);
 
         head.next.next.next.next.next.next = new ListNode(7);
-        Assert.assertEquals(4, findMiddle(head).value);
-        Assert.assertEquals(4, findMiddle2(head).value);
+        Assert.assertEquals(4, findMiddle(head).val);
+        Assert.assertEquals(4, findMiddle2(head).val);
     }
 }

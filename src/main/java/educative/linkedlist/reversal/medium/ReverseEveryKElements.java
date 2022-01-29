@@ -52,14 +52,14 @@ public class ReverseEveryKElements {
         head.next.next.next.next.next.next.next = new ListNode(8);
 
         ListNode result = reverse(head, 3);
-        Assert.assertEquals(3, result.value);
-        Assert.assertEquals(2, result.next.value);
-        Assert.assertEquals(1, result.next.next.value);
-        Assert.assertEquals(6, result.next.next.next.value);
-        Assert.assertEquals(5, result.next.next.next.next.value);
-        Assert.assertEquals(4, result.next.next.next.next.next.value);
-        Assert.assertEquals(8, result.next.next.next.next.next.next.value);
-        Assert.assertEquals(7, result.next.next.next.next.next.next.next.value);
+        Assert.assertEquals(3, result.val);
+        Assert.assertEquals(2, result.next.val);
+        Assert.assertEquals(1, result.next.next.val);
+        Assert.assertEquals(6, result.next.next.next.val);
+        Assert.assertEquals(5, result.next.next.next.next.val);
+        Assert.assertEquals(4, result.next.next.next.next.next.val);
+        Assert.assertEquals(8, result.next.next.next.next.next.next.val);
+        Assert.assertEquals(7, result.next.next.next.next.next.next.next.val);
         Assert.assertNull(result.next.next.next.next.next.next.next.next);
     }
 }
