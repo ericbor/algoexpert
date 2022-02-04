@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -47,42 +49,46 @@ public class ThreeSum {
     }
 
     public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> triplets = new ArrayList<>();
-        for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {
-            if (i == 0 || nums[i - 1] != nums[i]) {
-                twoSum(nums, i, triplets);
-            }
-        }
-        return triplets;
-    }
-    void twoSum(int[] nums, int i, List<List<Integer>> triplets) {
-        Set<Integer> seen = new HashSet<>();
-        for (int j = i + 1; j < nums.length; ++j) {
-            int complement = -nums[i] - nums[j];
 
-            if (seen.contains(complement)) {
-                triplets.add(Arrays.asList(nums[i], nums[j], complement));
-                while (j + 1 < nums.length && nums[j] == nums[j + 1]) {
-                    j++;
+        Map<Integer, Integer> lookup = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            lookup.put(-nums[i], i);
+        }
+
+        Set<List<Integer>> results = new HashSet<>();
+        for(int i = 0; i < nums.length; i++) {
+            for(int j = i + 1; j < nums.length; j++) {
+                int key = nums[i] + nums[j];
+                if(lookup.containsKey(key)) {
+                    int k = lookup.get(key);
+                    if(k != i && k != j) {
+                        List<Integer> tuple = Arrays.asList(nums[i], nums[j], nums[k]);
+                        Collections.sort(tuple);
+                        results.add(tuple);
+                    }
                 }
             }
-            seen.add(nums[j]);
         }
+
+        return new ArrayList<>(results);
     }
+
 
     @Test
     public void test() {
+        Assert.assertEquals(List.of(List.of(-2, 0, 2)), threeSum2(new int[] { -2, 0, 0, 2, 2 }));
         Assert.assertEquals(List.of(List.of(-2, 0, 2)), threeSum(new int[] { -2, 0, 0, 2, 2 }));
     }
 
     @Test
     public void test2() {
+        Assert.assertEquals(List.of(List.of(-1, -1, 2), List.of(-1, 0, 1)), threeSum2(new int[] { -1, 0, 1, 2, -1, -4 }));
         Assert.assertEquals(List.of(List.of(-1, -1, 2), List.of(-1, 0, 1)), threeSum(new int[] { -1, 0, 1, 2, -1, -4 }));
     }
 
     @Test
     public void test3() {
+        Assert.assertEquals(List.of(List.of(-2, -1, 3), List.of(-2, 0, 2), List.of(-1, 0, 1)), threeSum2(new int[] { 3, 0, -2, -1, 1, 2 }));
         Assert.assertEquals(List.of(List.of(-2, -1, 3), List.of(-2, 0, 2), List.of(-1, 0, 1)), threeSum(new int[] { 3, 0, -2, -1, 1, 2 }));
     }
 }

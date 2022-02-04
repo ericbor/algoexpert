@@ -10,36 +10,26 @@ import java.util.Map;
 public class LongestRepeatingCharacterReplacement {
 
     public int characterReplacement(String s, int k) {
-        int[] charCount = new int[26];
-
+        int[] hash = new int[26];
         int start = 0;
-        int maxRepeat = 0;
-        int longest = 0;
+        int maxCount = 0;
+        int maxLength = 0;
 
         for (int end = 0; end < s.length(); end++) {
-            char curr = s.charAt(end);
-            int currIdx = (int)curr - (int)'A';
+            int currIdx = (int) s.charAt(end) - (int) 'A';
+            hash[currIdx]++;
 
-            charCount[currIdx]++;
+            maxCount = Math.max(maxCount, hash[currIdx]);//largest count of a single, unique character in the current window
 
-
-            // IMPORTANT: maxRepeat is not the accurate number of dominant character, It is the historical maximum count
-            // We do not care about it because unless it gets greater, it won't affect our final max window size.
-            maxRepeat = Math.max(maxRepeat, charCount[currIdx]);
-
-            if (end - start + 1 - maxRepeat > k) {
-                char remove = s.charAt(start);
-                int removeIdx = (int)remove - (int)'A';
-                charCount[removeIdx]--;
-
+            //there are more characters in the window than we can replace, shrink
+            while (end - start + 1 - maxCount > k) {
+                hash[(int) s.charAt(start) - (int) 'A']--;
                 start++;
             }
 
-
-            longest = Math.max(longest, end - start + 1);
+            maxLength = Math.max(maxLength, end - start + 1);
         }
-
-        return longest;
+        return maxLength;
     }
 
 

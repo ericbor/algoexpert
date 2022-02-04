@@ -7,25 +7,27 @@ import org.junit.Test;
 public class MinInsertionStepsToMakePalindrome {
 
     public int minInsertions(String s) {
-        String reversed = new StringBuilder(s).reverse().toString();
+        return s.length() - findLPS(s);
+    }
 
-        int[][] dp = new int[s.length() + 1][reversed.length() + 1];
+    private int findLPS(String s) {
+        int[][] dp = new int[s.length()][s.length()];
 
-        for (int row = 1; row < s.length() + 1; row++) {
-            char sChar = s.charAt(row - 1);
-            for (int col = 1; col < reversed.length() + 1; col++) {
+        for (int i = 0; i < s.length(); i++) {
+            dp[i][i] = 1;
+        }
 
-                char rChar = reversed.charAt(col - 1);
-                if (sChar == rChar) {
-                    dp[row][col] = 1 + dp[row - 1][col - 1];
+        for (int i = s.length() - 1; i >= 0; i--) {
+            for (int j = i + 1; j < s.length(); j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = 2 + dp[i + 1][j - 1];
                 } else {
-                    dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]);
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
                 }
-
             }
         }
 
-        return s.length() - dp[s.length()][reversed.length()];
+        return dp[0][s.length() - 1];
     }
 
     @Test

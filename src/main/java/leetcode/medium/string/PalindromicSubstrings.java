@@ -33,13 +33,53 @@ public class PalindromicSubstrings {
         return counter;
     }
 
+    public int countSubstringsDP(String s) {
+        int counter = 0;
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            dp[i][i] = true;
+            counter++;
+        }
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            for (int j = i + 1; j < s.length(); j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    if (j - i == 1 || dp[i + 1][j - 1]) {
+                        dp[i][j] = true;
+                        counter++;
+                    }
+                }
+            }
+        }
+
+        return counter;
+
+    }
+
+    @Test
+    public void test5() {
+        Assert.assertEquals(3, countSubstringsDP("pqr"));
+    }
+
+    @Test
+    public void test4() {
+        Assert.assertEquals(7, countSubstringsDP("cddpd"));
+    }
+
     @Test
     public void test() {
+        Assert.assertEquals(7, countSubstringsDP("abdbca"));
+    }
+
+    @Test
+    public void test3() {
         Assert.assertEquals(3, countSubstrings("abc"));
+        Assert.assertEquals(3, countSubstringsDP("abc"));
     }
 
     @Test
     public void test2() {
         Assert.assertEquals(6, countSubstrings("aaa"));
+        Assert.assertEquals(6, countSubstringsDP("aaa"));
     }
 }

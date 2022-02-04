@@ -7,24 +7,20 @@ import org.junit.Test;
 public class FlipStringToMonotoneIncreasing {
     // O(N), O(1)
     public int minFlipsMonoIncr(String s) {
-        char[] arr = s.toCharArray();
-        int zeros = 0;
-        for (char c : arr) {
-            if (c == '0') {
-                zeros++;
-            }
-        }
-
-        int minFlips = Math.min(zeros, arr.length - zeros); // zeros or ones, whichever is less
+        int minFlips = 0;
         int ones = 0;
-        for (char c : arr) {
+        for (char c : s.toCharArray()) {
+            //if c is 1, then it will not inpact the minFlips
             if (c == '1') {
                 ones++;
             } else {
-                zeros--;
+                // if c is 0, then 2 options we can do to make it mono incr
+                // 1. keep it as 0, and flip all the preceeding 1 to 0, need to know the count of ones so far
+                // 2. flip it to 1, will not need to do anything
+                minFlips++;
             }
 
-            minFlips = Math.min(minFlips, ones + zeros);
+            minFlips = Math.min(minFlips, ones);
         }
 
         return minFlips;

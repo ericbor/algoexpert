@@ -58,7 +58,8 @@ public class TheKthFactorOfN {
 
     @Test
     public void test() {
-        Assert.assertEquals(3, kthFactor(12, 3));
+        Assert.assertEquals(12, kthFactor(12, 6));
+        Assert.assertEquals(12, kthFactor2(12, 6));
     }
 
     @Test

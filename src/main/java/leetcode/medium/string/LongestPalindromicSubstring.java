@@ -35,43 +35,83 @@ public class LongestPalindromicSubstring {
         return right - left - 1;
     }
 
+    public String longestPalindromeDP(String s) {
+        //'true' if the string from index 'i' to index 'j' is a palindrome
+        boolean[][] dp = new boolean[s.length()][s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            dp[i][i] = true;
+        }
+
+        int maxLength = 1;
+        int start = 0;
+        int end = 0;
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            for (int j = i + 1; j < s.length(); j++) {
+
+                if (s.charAt(i) == s.charAt(j)) {
+                    // if it's a two character string or if the remaining string is a palindrome too
+                    if (j - i == 1 || dp[i + 1][j - 1]) {
+                        dp[i][j] = true;
+
+                        int currLength = j - i + 1;
+                        if (currLength > maxLength) {
+                            maxLength = currLength;
+                            start = i;
+                            end = j;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return s.substring(start, end + 1);
+    }
+
     @Test
     public void test() {
         Assert.assertEquals("racecar", longestPalindrome("racecar"));
+        Assert.assertEquals("racecar", longestPalindromeDP("racecar"));
     }
 
     @Test
     public void test2() {
         Assert.assertEquals("abba", longestPalindrome("abba"));
+        Assert.assertEquals("abba", longestPalindromeDP("abba"));
     }
 
     @Test
     public void test7() {
         Assert.assertEquals("aca", longestPalindrome("aacabdkacaa"));
+        Assert.assertEquals("aca", longestPalindromeDP("aacabdkacaa"));
     }
 
     @Test
     public void test6() {
         Assert.assertEquals("amanaplanacanalpanama", longestPalindrome("amanaplanacanalpanama"));
+        Assert.assertEquals("amanaplanacanalpanama", longestPalindromeDP("amanaplanacanalpanama"));
     }
 
     @Test
     public void test5() {
         Assert.assertEquals("aba", longestPalindrome("babad"));
+        Assert.assertEquals("aba", longestPalindromeDP("babad"));
     }
 
     @Test
     public void test8() {
-        Assert.assertEquals("bb", longestPalindrome("cbbd"));
+        Assert.assertEquals("bb", longestPalindromeDP("cbbd"));
     }
 
     @Test
     public void test3() {
-        Assert.assertEquals("c", longestPalindrome("ac"));
+        Assert.assertEquals("a", longestPalindromeDP("ac"));
     }
 
     @Test
     public void test4() {
-        Assert.assertEquals("a", longestPalindrome("a"));
+        Assert.assertEquals("a", longestPalindromeDP("a"));
     }
 }
