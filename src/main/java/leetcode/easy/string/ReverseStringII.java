@@ -5,25 +5,6 @@ import org.junit.Test;
 
 //https://leetcode.com/problems/reverse-string-ii/
 public class ReverseStringII {
-    public String reverseStr2(String s, int k) {
-        char[] arr = s.toCharArray();
-        reverse(arr, 0, k - 1);
-
-        int start = 0;
-        int nextSwapIndex = start + 2 * k;
-
-        while (start < arr.length) {
-            if (start == nextSwapIndex) {
-                reverse(arr, start, start + k - 1);
-
-                nextSwapIndex = start + 2 * k;
-            }
-
-            start++;
-        }
-
-        return String.valueOf(arr);
-    }
 
     private void reverse(char[] arr, int from, int to) {
         int start = from;

@@ -11,21 +11,21 @@ public class PartitionLabels {
 
     public List<Integer> partitionLabels(String s) {
         int[] last = new int[26];
-        for (int i = 0; i < s.length(); ++i) {
+        for (int i = 0; i < s.length(); i++) {
             last[(int) s.charAt(i) - (int) 'a'] = i;
         }
 
-        int j = 0;
-        int anchor = 0;
+        int end = 0;
+        int start = 0;
         List<Integer> results = new ArrayList<>();
-        for (int i = 0; i < s.length(); ++i) {
+        for (int i = 0; i < s.length(); i++) {
             int lastIndex = last[(int) s.charAt(i) - (int) 'a'];
 
-            j = Math.max(j, lastIndex);
+            end = Math.max(end, lastIndex);
 
-            if (i == j) {
-                results.add(i - anchor + 1);
-                anchor = i + 1;
+            if (i == end) {
+                results.add(end - start + 1);
+                start = end + 1;
             }
         }
 

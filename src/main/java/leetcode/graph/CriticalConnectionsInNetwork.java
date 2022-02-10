@@ -6,48 +6,50 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 //https://leetcode.com/problems/critical-connections-in-a-network/
 public class CriticalConnectionsInNetwork {
-    int[] discoveryTime;
-    int [] low;
-    int time = 1;
-    private final List<List<Integer>> bridges = new ArrayList<>();
-    private final Map<Integer,List<Integer>> edgeMap = new HashMap<>();
-
     public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
-        discoveryTime = new int[n];
-        low = new int[n];
+        Map<Integer, List<Integer>> graph = new HashMap<>(n);
 
         for (int i = 0; i < n; i++) {
-            edgeMap.put(i, new ArrayList<>());
+            graph.put(i, new ArrayList<>());
         }
-        for (List<Integer> conn : connections) {
-            edgeMap.get(conn.get(0)).add(conn.get(1));
-            edgeMap.get(conn.get(1)).add(conn.get(0));
+        for (List<Integer> connection : connections) {
+            graph.get(connection.get(0)).add(connection.get(1));
+            graph.get(connection.get(1)).add(connection.get(0));
         }
 
-        dfs(0, -1);
-        return bridges;
+        Set<List<Integer>> connectionsSet = new HashSet<>(connections);
+        int[] rank = new int[n];
+        Arrays.fill(rank, -2);
+        dfs(graph, 0, 0, rank, connectionsSet);
+        return new ArrayList<>(connectionsSet);
     }
-    public void dfs(int curr, int prev) {
-        discoveryTime[curr] = time;
-        low[curr] = time;
-        time++;
 
-        for (int next : edgeMap.get(curr)) {
-            if (discoveryTime[next] == 0) {
-                dfs(next, curr);
-                low[curr] = Math.min(low[curr], low[next]);
-            } else if (next != prev) {
-                low[curr] = Math.min(low[curr], discoveryTime[next]);
+    int dfs(Map<Integer, List<Integer>> graph, int node, int depth, int[] rank, Set<List<Integer>> connectionsSet) {
+        if (rank[node] >= 0) {
+            return rank[node]; // already visited node. return its rank
+        }
+        rank[node] = depth;
+        int minDepthFound = depth; // can be Integer.MAX_VALUE also.
+        for (Integer neighbor : graph.get(node)) {
+            if (rank[neighbor] == depth - 1) { // ignore parent
+                continue;
             }
-            if (low[next] > discoveryTime[curr]) {
-                bridges.add(Arrays.asList(curr, next));
+            int minDepth = dfs(graph, neighbor, depth + 1, rank, connectionsSet);
+            minDepthFound = Math.min(minDepthFound, minDepth);
+            if (minDepth <= depth) {
+                // to avoid the sorting just try to remove both combinations. of (x,y) and (y,x)
+                connectionsSet.remove(Arrays.asList(node, neighbor));
+                connectionsSet.remove(Arrays.asList(neighbor, node));
             }
         }
+        return minDepthFound;
     }
 
     @Test

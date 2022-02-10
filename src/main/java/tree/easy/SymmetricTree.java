@@ -20,9 +20,11 @@ public class SymmetricTree {
         if (t1 == null || t2 == null) {
             return false;
         }
+        if(t1.val != t2.val) {
+            return false;
+        }
 
-        return t1.val == t2.val && isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right);
-
+        return isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right);
     }
 
     public boolean isSymmetricRecursive(TreeNode root) {

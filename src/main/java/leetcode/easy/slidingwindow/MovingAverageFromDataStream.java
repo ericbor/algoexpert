@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 //https://leetcode.com/problems/moving-average-from-data-stream/
-public class MovingAverageFromDataStream {
+public class  MovingAverageFromDataStream {
     int windowSize;
     int windowSum;
     Queue<Integer> queue = new LinkedList<>();

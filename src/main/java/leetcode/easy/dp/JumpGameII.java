@@ -13,10 +13,10 @@ public class JumpGameII {
             dp[i] = Integer.MAX_VALUE;
         }
 
-        for (int start = 0; start < nums.length - 1; start++) {
-            for (int end = start + 1; end <= start + nums[start] && end < nums.length; end++) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j <= i + nums[i] && j < nums.length; j++) {
                 //min value between the current jump-count and the jumps needed to reach the current index + 1.
-                dp[end] = Math.min(dp[end], dp[start] + 1);
+                dp[j] = Math.min(dp[j], dp[i] + 1);
             }
         }
 
