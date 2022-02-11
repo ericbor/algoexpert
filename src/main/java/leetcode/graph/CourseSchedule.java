@@ -13,15 +13,14 @@ import java.util.Queue;
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int[] p : prerequisites) {
+            map.put(p[0], new ArrayList<>());
+        }
 
         int[] indegree = new int[numCourses];
-        for (int[] prerequisite : prerequisites) {
-
-            List<Integer> courseList = map.getOrDefault(prerequisite[0], new ArrayList<>());
-            courseList.add(prerequisite[1]);
-            map.put(prerequisite[0], courseList);
-
-            indegree[prerequisite[1]]++;
+        for (int[] p : prerequisites) {
+            map.get(p[0]).add(p[1]);
+            indegree[p[1]]++;
         }
 
         Queue<Integer> queue = new LinkedList<>();
@@ -33,10 +32,9 @@ public class CourseSchedule {
 
         int count = numCourses;
         while (!queue.isEmpty()) {
-            int current = queue.poll();
-            if (map.containsKey(current)) {
-                List<Integer> coursePrerequisites = map.get(current);
-                for (int i : coursePrerequisites) {
+            int curr = queue.poll();
+            if (map.containsKey(curr)) {
+                for (int i : map.get(curr)) {
                     indegree[i]--;
                     if (indegree[i] == 0) {
                         queue.add(i);

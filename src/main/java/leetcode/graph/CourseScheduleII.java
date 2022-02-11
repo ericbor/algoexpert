@@ -13,19 +13,19 @@ import java.util.Queue;
 //https://leetcode.com/problems/course-schedule-ii/
 public class CourseScheduleII {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        Map<Integer, List<Integer>> adjMap = new HashMap<>();
-        int[] outdegree = new int[numCourses];
+        Map<Integer, List<Integer>> graph = new HashMap<>();
 
+        for (int[] p : prerequisites) {
+            graph.put(p[1], new ArrayList<>());
+        }
+
+        int[] outdegree = new int[numCourses];
         // Create the adjacency list representation of the graph
-        for (int[] prerequisite : prerequisites) {
-            int dest = prerequisite[0];
-            int src = prerequisite[1];
-            List<Integer> courseList = adjMap.getOrDefault(src, new ArrayList<>());
-            courseList.add(dest);
-            adjMap.put(src, courseList);
+        for (int[] p : prerequisites) {
+            graph.get(p[1]).add(p[0]);
 
             // Record in-degree of each vertex
-            outdegree[dest]++;
+            outdegree[p[0]]++;
         }
 
         // Add all vertices with 0 in-degree to the queue
@@ -45,9 +45,8 @@ public class CourseScheduleII {
             i++;
 
             // Reduce the in-degree of each neighbor by 1
-            if (adjMap.containsKey(node)) {
-                List<Integer> courses = adjMap.get(node);
-                for (Integer course : courses) {
+            if (graph.containsKey(node)) {
+                for (int course : graph.get(node)) {
                     outdegree[course]--;
 
                     // If in-degree of a course becomes 0, add it to the Q
