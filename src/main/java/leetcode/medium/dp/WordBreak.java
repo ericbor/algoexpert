@@ -16,14 +16,14 @@ public class WordBreak {
     }
 
     private boolean wordBreakHelper(String s, Set<String> wordDict, int start) {
-        if(s.length() == start) {
+        if (s.length() == start) {
             return true;
         }
 
-        for(int end = start + 1; end <= s.length(); end++) {
+        for (int end = start + 1; end <= s.length(); end++) {
             String substring = s.substring(start, end);
-            if(wordDict.contains(substring)) {
-                if(wordBreakHelper(s, wordDict, end)) {
+            if (wordDict.contains(substring)) {
+                if (wordBreakHelper(s, wordDict, end)) {
                     return true;
                 }
             }
@@ -39,17 +39,17 @@ public class WordBreak {
     }
 
     private boolean wordBreakHelperMemo(String s, Set<String> wordDict, int start, Boolean[] cache) {
-        if(s.length() == start) {
+        if (s.length() == start) {
             return true;
         }
-        if(cache[start] != null) {
+        if (cache[start] != null) {
             return cache[start];
         }
 
-        for(int end = start + 1; end <= s.length(); end++) {
+        for (int end = start + 1; end <= s.length(); end++) {
             String substring = s.substring(start, end);
-            if(wordDict.contains(substring)) {
-                if(wordBreakHelperMemo(s, wordDict, end, cache)) {
+            if (wordDict.contains(substring)) {
+                if (wordBreakHelperMemo(s, wordDict, end, cache)) {
                     cache[start] = true;
                     return cache[start];
                 }
@@ -65,13 +65,15 @@ public class WordBreak {
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true;
 
-        for (int end = 1; end <= s.length(); end++) {
-            for (int start = 0; start < end; start++) {
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 0; j <= i; j++) {
 
-                String substring = s.substring(start, end);
-                if (dp[start] && wordDictSet.contains(substring)) {
-                    dp[end] = true;
-                    break;
+                String substring = s.substring(j, i + 1);
+                if (wordDictSet.contains(substring)) {
+                    if (dp[j]) {
+                        dp[i + 1] = true;
+                        break;
+                    }
                 }
             }
         }
@@ -80,22 +82,22 @@ public class WordBreak {
 
     @Test
     public void test() {
-        Assert.assertTrue(wordBreakBF("leetcode", List.of("leet","code")));
-        Assert.assertTrue(wordBreakMemo("leetcode", List.of("leet","code")));
-        Assert.assertTrue(wordBreakDP("leetcode", List.of("leet","code")));
+        Assert.assertTrue(wordBreakBF("leetcode", List.of("leet", "code")));
+        Assert.assertTrue(wordBreakMemo("leetcode", List.of("leet", "code")));
+        Assert.assertTrue(wordBreakDP("leetcode", List.of("leet", "code")));
     }
 
     @Test
     public void test2() {
-        Assert.assertTrue(wordBreakBF("applepenapple", List.of("apple","pen")));
-        Assert.assertTrue(wordBreakMemo("applepenapple", List.of("apple","pen")));
-        Assert.assertTrue(wordBreakDP("applepenapple", List.of("apple","pen")));
+        Assert.assertTrue(wordBreakBF("applepenapple", List.of("apple", "pen")));
+        Assert.assertTrue(wordBreakMemo("applepenapple", List.of("apple", "pen")));
+        Assert.assertTrue(wordBreakDP("applepenapple", List.of("apple", "pen")));
     }
 
     @Test
     public void test3() {
-        Assert.assertFalse(wordBreakBF("catsandog", List.of("cats","dog","sand","and","cat")));
-        Assert.assertFalse(wordBreakMemo("catsandog", List.of("cats","dog","sand","and","cat")));
-        Assert.assertFalse(wordBreakDP("catsandog", List.of("cats","dog","sand","and","cat")));
+        Assert.assertFalse(wordBreakBF("catsandog", List.of("cats", "dog", "sand", "and", "cat")));
+        Assert.assertFalse(wordBreakMemo("catsandog", List.of("cats", "dog", "sand", "and", "cat")));
+        Assert.assertFalse(wordBreakDP("catsandog", List.of("cats", "dog", "sand", "and", "cat")));
     }
 }
