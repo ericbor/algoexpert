@@ -1,4 +1,4 @@
-package leetcode.medium.dp;
+package dp;
 
 //https://leetcode.com/problems/maximal-square/
 public class MaximalSquare {

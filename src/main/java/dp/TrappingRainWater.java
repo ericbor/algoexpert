@@ -1,4 +1,4 @@
-package leetcode.medium.dp;
+package dp;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -87,6 +87,7 @@ public class TrappingRainWater {
     @Test
     public void test() {
         Assert.assertEquals(6, trap(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }));
+        Assert.assertEquals(6, trap2(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }));
     }
 
     @Test

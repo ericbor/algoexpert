@@ -19,7 +19,7 @@ public class RangeAddition {
         return results;
     }
 
-    // O(N+K), O(N)
+    // O(N+K), O(1)
     public int[] getModifiedArray(int length, int[][] updates) {
         int[] results = new int[length];
 

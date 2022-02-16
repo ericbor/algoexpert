@@ -3,6 +3,8 @@ package leetcode.amazon.easy;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -38,14 +40,14 @@ public class NextGreaterElementI {
 
     public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
-        for(int i = 0; i < nums2.length; i++) {
-            for(int k = i + 1; k < nums2.length; k++) {
-                if(nums2[k] > nums2[i]) {
+        for (int i = 0; i < nums2.length; i++) {
+            for (int k = i + 1; k < nums2.length; k++) {
+                if (nums2[k] > nums2[i]) {
                     map.put(nums2[i], nums2[k]);
                     break;
                 }
             }
-            if(!map.containsKey(nums2[i])) {
+            if (!map.containsKey(nums2[i])) {
                 map.put(nums2[i], -1);
             }
         }
@@ -60,7 +62,7 @@ public class NextGreaterElementI {
     }
 
     public int[] nextGreaterElement3(int[] nums1, int[] nums2) {
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int num : nums2) {
@@ -71,11 +73,11 @@ public class NextGreaterElementI {
         }
 
         while (!stack.isEmpty()) {
-            map.put(stack.pop(), - 1);
+            map.put(stack.pop(), -1);
         }
 
         int[] results = new int[nums1.length];
-        for(int i = 0; i < nums1.length; i++) {
+        for (int i = 0; i < nums1.length; i++) {
             results[i] = map.get(nums1[i]);
         }
 
@@ -85,15 +87,12 @@ public class NextGreaterElementI {
     @Test
     public void test() {
         Assert.assertArrayEquals(new int[] { -1, 3, -1 }, nextGreaterElement(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 }));
+        Assert.assertArrayEquals(new int[] { -1, 3, -1 }, nextGreaterElement2(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 }));
+        Assert.assertArrayEquals(new int[] { -1, 3, -1 }, nextGreaterElement3(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 }));
     }
 
     @Test
     public void test2() {
-        Assert.assertArrayEquals(new int[] { -1, 3, -1 }, nextGreaterElement2(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 }));
-    }
-
-    @Test
-    public void test3() {
-        Assert.assertArrayEquals(new int[] { -1, 3, -1 }, nextGreaterElement3(new int[] { 4, 1, 2 }, new int[] { 1, 3, 4, 2 }));
+        Assert.assertArrayEquals(new int[] { -1, -1, -1 }, nextGreaterElement3(new int[] { 4, 1, 2 }, new int[] { 4,3,2,1 }));
     }
 }

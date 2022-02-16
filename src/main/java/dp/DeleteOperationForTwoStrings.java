@@ -1,4 +1,4 @@
-package leetcode.medium.dp;
+package dp;
 
 //https://leetcode.com/problems/delete-operation-for-two-strings/
 public class DeleteOperationForTwoStrings {

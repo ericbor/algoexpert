@@ -1,4 +1,4 @@
-package leetcode.amazon.easy.dp;
+package dp;
 
 import org.junit.Assert;
 import org.junit.Test;
