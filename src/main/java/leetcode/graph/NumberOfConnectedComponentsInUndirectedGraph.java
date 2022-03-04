@@ -44,9 +44,7 @@ public class NumberOfConnectedComponentsInUndirectedGraph {
                         queue.add(neighbor);
                         visited[neighbor] = true;
                     }
-
                 }
-
             }
 
             count++;

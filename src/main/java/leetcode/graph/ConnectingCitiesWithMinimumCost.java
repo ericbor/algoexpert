@@ -27,7 +27,7 @@ public class ConnectingCitiesWithMinimumCost {
         }
 
         Queue<int[]> minHeap = new PriorityQueue<>((a, b) -> a[1] - b[1]);
-        minHeap.add(new int[] { 1, 0 }); // start with city 1 (not 0, constraint requirement)
+        minHeap.add(new int[] { 1, 0 }); // {1=city, 0=cost} Start with city 1 (there are N cities labedl from 1 to N)
 
         boolean[] visited = new boolean[n + 1]; // cities start from 1, not 0, that's why we need array n+1 (index 0 won't be used)
 
