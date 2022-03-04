@@ -21,6 +21,7 @@ public class ReorderRoutesToMakeAllPathsLeadToCityZero {
             //storing the direction as "source,destination"
             String edge = source + "," + destination;
             edgeDirection.add(edge);
+
             graph.computeIfAbsent(source, k -> new HashSet<>());
             graph.computeIfAbsent(destination, k -> new HashSet<>());
             graph.get(source).add(destination);

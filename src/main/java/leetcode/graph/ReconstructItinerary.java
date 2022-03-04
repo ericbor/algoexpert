@@ -21,13 +21,10 @@ public class ReconstructItinerary {
         for (List<String> ticket : tickets) {
             String from = ticket.get(0);
             String to = ticket.get(1);
-            if (flightMap.containsKey(from)) {
-                flightMap.get(from).add(to);
-            } else {
-                LinkedList<String> toList = new LinkedList<>();
-                toList.add(to);
-                flightMap.put(from, toList);
-            }
+
+            flightMap.computeIfAbsent(from, key -> new LinkedList<>());
+
+            flightMap.get(from).add(to);
         }
 
         // Step 2). order the destinations
