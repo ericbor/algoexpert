@@ -5,7 +5,7 @@ import org.junit.Test;
 import tree.design.TreeNode;
 
 //https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
-public class LowestCommonAncestor {
+public class LowestCommonAncestorOfBST {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
         int parentVal = root.val;

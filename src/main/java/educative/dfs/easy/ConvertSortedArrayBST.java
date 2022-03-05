@@ -6,15 +6,13 @@ import tree.design.TreeNode;
 
 //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 public class ConvertSortedArrayBST {
-    int[] nums;
 
     public TreeNode convertToBST(int[] nums) {
-        this.nums = nums;
 
-        return preorder(0, nums.length - 1);
+        return preorder(nums, 0, nums.length - 1);
     }
 
-    private TreeNode preorder(int left, int right) {
+    private TreeNode preorder(int[] nums, int left, int right) {
         if (left > right) {
             return null;
         }
@@ -24,8 +22,8 @@ public class ConvertSortedArrayBST {
 
         // preorder traversal: node -> left -> right
         TreeNode root = new TreeNode(nums[mid]);
-        root.left = preorder(left, mid - 1);
-        root.right = preorder(mid + 1, right);
+        root.left = preorder(nums, left, mid - 1);
+        root.right = preorder(nums, mid + 1, right);
 
         return root;
     }

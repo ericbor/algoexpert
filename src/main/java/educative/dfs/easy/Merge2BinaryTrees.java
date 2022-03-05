@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 //https://leetcode.com/problems/merge-two-binary-trees/solution/
@@ -28,7 +30,7 @@ public class Merge2BinaryTrees {
             return root2;
         }
 
-        Stack<TreeNode[]> stack = new Stack<>();
+        Deque<TreeNode[]> stack = new ArrayDeque<>();
         stack.push(new TreeNode[] { root1, root2 });
 
         while (!stack.isEmpty()) {

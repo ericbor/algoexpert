@@ -10,7 +10,7 @@ import java.util.List;
 //https://leetcode.com/problems/binary-tree-paths/
 public class BinaryTreePaths {
 
-    LinkedList<String> paths = new LinkedList<>();
+    private final List<String> paths = new LinkedList<>();
 
     public List<String> binaryTreePaths(TreeNode root) {
 
