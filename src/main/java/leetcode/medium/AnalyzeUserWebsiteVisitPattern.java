@@ -34,8 +34,8 @@ public class AnalyzeUserWebsiteVisitPattern {
 
     private Map<String, Integer> generateFrequencies(Map<String, Set<String>> sequencesByUser) {
         Map<String, Integer> map = new HashMap<>();
-        for(Set<String> sequenceSet: sequencesByUser.values()) {
-            for(String sequence: sequenceSet) {
+        for (Set<String> sequenceSet : sequencesByUser.values()) {
+            for (String sequence : sequenceSet) {
                 map.put(sequence, map.getOrDefault(sequence, 0) + 1);
             }
         }
@@ -92,7 +92,7 @@ public class AnalyzeUserWebsiteVisitPattern {
         for (Map.Entry<String, List<Visit>> entry : visitsByUser.entrySet()) {
             List<Visit> visits = entry.getValue();
             String user = entry.getKey();
-            if(visits.size() < 3) {
+            if (visits.size() < 3) {
                 continue;
             }
             sequences.put(user, new HashSet<>());
@@ -140,7 +140,7 @@ public class AnalyzeUserWebsiteVisitPattern {
 
     @Test
     public void test() {
-        Assert.assertEquals(List.of("hibympufi","hibympufi","yljmntrclw"), mostVisitedPattern(new String[] { "h","eiy","cq","h",
+        Assert.assertEquals(List.of("hibympufi", "hibympufi", "yljmntrclw"), mostVisitedPattern(new String[] { "h", "eiy", "cq", "h",
                 "cq",
                 "txldsscx",
                 "cq",
@@ -148,7 +148,7 @@ public class AnalyzeUserWebsiteVisitPattern {
                 "h",
                 "cq",
                 "cq" },
-            new int[] { 527896567,334462937,517687281,134127993,859112386,159548699,51100299,444082139,926837079,317455832,411747930 }, new String[] { "hibympufi","hibympufi","hibympufi","hibympufi",
+            new int[] { 527896567, 334462937, 517687281, 134127993, 859112386, 159548699, 51100299, 444082139, 926837079, 317455832, 411747930 }, new String[] { "hibympufi", "hibympufi", "hibympufi", "hibympufi",
                 "hibympufi",
                 "hibympufi",
                 "hibympufi",

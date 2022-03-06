@@ -4,12 +4,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 //https://leetcode.com/problems/path-sum-ii/
 public class PathSumII {
@@ -59,11 +59,11 @@ public class PathSumII {
         Map<TreeNode, List<Integer>> pathMap = new HashMap<>();
         pathMap.put(root, list);
 
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        stack.push(root);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
 
-        while (!stack.isEmpty()) {
-            TreeNode curr = stack.pop();
+        while (!queue.isEmpty()) {
+            TreeNode curr = queue.poll();
             List<Integer> currPath = pathMap.get(curr);
 
             if (curr.left == null && curr.right == null) {
@@ -78,7 +78,7 @@ public class PathSumII {
                 pathMap.put(curr.right, rightPath);
 
                 curr.right.val = curr.right.val + curr.val;
-                stack.push(curr.right);
+                queue.add(curr.right);
             }
 
             if (curr.left != null) {
@@ -87,7 +87,7 @@ public class PathSumII {
                 pathMap.put(curr.left, leftPath);
 
                 curr.left.val = curr.left.val + curr.val;
-                stack.push(curr.left);
+                queue.add(curr.left);
             }
         }
 
@@ -107,6 +107,6 @@ public class PathSumII {
         root.right.right.left = new TreeNode(5);
         root.right.right.right = new TreeNode(1);
 
-        Assert.assertEquals(List.of(List.of(5, 4, 11, 2), List.of(5, 8, 4, 5)), pathSum_2(root, 22));
+        Assert.assertEquals(List.of(List.of(5, 8, 4, 5), List.of(5, 4, 11, 2)), pathSum_2(root, 22));
     }
 }
