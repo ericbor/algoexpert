@@ -17,12 +17,12 @@ public class MinSwapsToGroupAllOnes {
         int start = 0;
         int maxOnesInWindow = 0;
         int currOnesInWindow = 0;
-        for (int end = 0; end < data.length; end++) {
-            if (data[end] == 1) {
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] == 1) {
                 currOnesInWindow++;
             }
 
-            if (end - start >= totalOnes) {
+            if (i - start >= totalOnes) {
                 if (data[start] == 1) {
                     currOnesInWindow--;
                 }

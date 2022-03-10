@@ -17,21 +17,25 @@ public class AnalyzeUserWebsiteVisitPattern {
     public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
         Map<String, List<Visit>> map = new HashMap<>();
 
-        for (int i = 0; i < username.length; ++i) {
+        for (int i = 0; i < username.length; i++) {
             if (!map.containsKey(username[i])) {
                 map.put(username[i], new ArrayList<>());
             }
             map.get(username[i]).add(new Visit(website[i], timestamp[i]));
         }
 
-        sortVisitsByTimestamp(map);
+        //sortVisitsByTimestamp(map);
+        map.values().forEach(Collections::sort);
 
+        //joe -> set("home about career", ...)
         Map<String, Set<String>> sequencesByUser = generateSequences(map);
+        //"home about career" -> 2
         Map<String, Integer> sequencesByFrequency = generateFrequencies(sequencesByUser);
 
         return pickMaxSequenceAndReformat(sequencesByFrequency);
     }
 
+    //key -> "home about career", val -> 2
     private Map<String, Integer> generateFrequencies(Map<String, Set<String>> sequencesByUser) {
         Map<String, Integer> map = new HashMap<>();
         for (Set<String> sequenceSet : sequencesByUser.values()) {
@@ -73,20 +77,11 @@ public class AnalyzeUserWebsiteVisitPattern {
         return Arrays.asList(parts);
     }
 
-    private List<String> getSmallestPattern(List<String> first, List<String> second) {
-        for (int i = 0; i < first.size(); i++) {
-            String a = first.get(i);
-            String b = second.get(i);
-            if (a.compareTo(b) == -1) {
-                return first;
-            } else if (a.compareTo(b) == 1) {
-                return second;
-            }
-        }
-
-        return null;
-    }
-
+    /**
+     *
+     * @param visitsByUser
+     * @return Map(key -> user, value -> "home about career")
+     */
     private Map<String, Set<String>> generateSequences(Map<String, List<Visit>> visitsByUser) {
         Map<String, Set<String>> sequences = new HashMap<>();
         for (Map.Entry<String, List<Visit>> entry : visitsByUser.entrySet()) {
@@ -128,14 +123,14 @@ public class AnalyzeUserWebsiteVisitPattern {
             this.time = time;
         }
 
-        public int compareTo(Visit v) {
-            if (v.time == this.time) {
+        @Override
+        public int compareTo(Visit that) {
+            if (that.time == this.time) {
                 return 0;
-            } else {
-                return this.time > v.time ? 1 : -1;
             }
-        }
 
+            return this.time > that.time ? 1 : -1;
+        }
     }
 
     @Test
