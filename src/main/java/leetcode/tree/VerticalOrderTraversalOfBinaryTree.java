@@ -25,15 +25,15 @@ public class VerticalOrderTraversalOfBinaryTree {
         int row = 0;
 
         Map<Integer, Queue<Pair>> columnValues = new HashMap<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int levelSize = queue.size();
-            for(int i = 0; i < levelSize; i++) {
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode curr = queue.poll();
                 int currColumn = columnByNode.get(curr);
 
-                if(!columnValues.containsKey(currColumn)) {
+                if (!columnValues.containsKey(currColumn)) {
                     columnValues.put(currColumn, new PriorityQueue<>((a, b) -> {
-                        if(a.row == b.row) {
+                        if (a.row == b.row) {
                             return a.val - b.val;
                         }
 
@@ -42,11 +42,11 @@ public class VerticalOrderTraversalOfBinaryTree {
                 }
                 columnValues.get(currColumn).add(new Pair(row, curr.val));
 
-                if(curr.left != null) {
+                if (curr.left != null) {
                     columnByNode.put(curr.left, currColumn - 1);
                     queue.add(curr.left);
                 }
-                if(curr.right != null) {
+                if (curr.right != null) {
                     columnByNode.put(curr.right, currColumn + 1);
                     queue.add(curr.right);
                 }
@@ -58,10 +58,10 @@ public class VerticalOrderTraversalOfBinaryTree {
         }
 
         List<List<Integer>> results = new ArrayList<>(columnValues.size());
-        while(columnValues.containsKey(minColumn)) {
+        while (columnValues.containsKey(minColumn)) {
             Queue<Pair> pairs = columnValues.get(minColumn);
             List<Integer> result = new ArrayList<>(pairs.size());
-            while(!pairs.isEmpty()) {
+            while (!pairs.isEmpty()) {
                 result.add(pairs.poll().val);
             }
             results.add(result);
@@ -90,6 +90,6 @@ public class VerticalOrderTraversalOfBinaryTree {
         root.right = new TreeNode(3);
         root.right.left = new TreeNode(5);
         root.right.right = new TreeNode(7);
-        Assert.assertEquals(List.of(List.of(4), List.of(2), List.of(1,5,6), List.of(3), List.of(7)), verticalTraversal(root));
+        Assert.assertEquals(List.of(List.of(4), List.of(2), List.of(1, 5, 6), List.of(3), List.of(7)), verticalTraversal(root));
     }
 }

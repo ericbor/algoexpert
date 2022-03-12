@@ -3,34 +3,53 @@ package leetcode.medium.matrix;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 //https://leetcode.com/problems/cinema-seat-allocation/
 public class CinemaSeatAllocation {
+
     public int maxNumberOfFamilies(int n, int[][] reservedSeats) {
-        boolean[][] reserved = new boolean[n + 1][11];
-        for (int[] reservedRow : reservedSeats) {
-            reserved[reservedRow[0]][reservedRow[1]] = true;
+        Map<Integer, List<Integer>> rowToSeatRes = new HashMap<>();
+
+        for (int[] row : reservedSeats) {
+            if (!rowToSeatRes.containsKey(row[0])) {
+                rowToSeatRes.put(row[0], new ArrayList<>());
+            }
+            rowToSeatRes.get(row[0]).add(row[1]);
         }
 
-        int maxFamilies = 0;
-        for (int row = 1; row <= n; row++) {
-            if (checkLeftAisle(row, reserved)) {
-                maxFamilies++;
-                if (checkRightAisle(row, reserved)) {
-                    maxFamilies++;
-                }
-            } else if (checkCentral(row, reserved)) {
-                maxFamilies++;
-            } else if (checkRightAisle(row, reserved)) {
-                maxFamilies++;
+        int result = (n - rowToSeatRes.size()) * 2;         // These rows do not contain any reservations
+
+        for (List<Integer> row : rowToSeatRes.values()) { // Check possible family seating in each row
+            boolean flag = false;
+
+            // Check first possibility
+            if (checkLeftAisle(row)) {
+                result++;
+                flag = true;
+            }
+
+            // Check second possibility
+            if (checkRightAisle(row)) {
+                result++;
+                flag = true;
+            }
+
+            // Check middle seats only if first two are not used
+            if (!flag && checkCentral(row)) {
+                result++;
             }
         }
 
-        return maxFamilies;
+        return result;
     }
 
-    private boolean checkLeftAisle(int row, boolean[][] reserved) {
+    private boolean checkLeftAisle(List<Integer> row) {
         for (int col = 2; col <= 5; col++) {
-            if (reserved[row][col]) {
+            if (row.contains(col)) {
                 return false;
             }
         }
@@ -38,9 +57,9 @@ public class CinemaSeatAllocation {
         return true;
     }
 
-    private boolean checkRightAisle(int row, boolean[][] reserved) {
+    private boolean checkRightAisle(List<Integer> row) {
         for (int col = 6; col <= 9; col++) {
-            if (reserved[row][col]) {
+            if (row.contains(col)) {
                 return false;
             }
         }
@@ -48,9 +67,9 @@ public class CinemaSeatAllocation {
         return true;
     }
 
-    private boolean checkCentral(int row, boolean[][] reserved) {
+    private boolean checkCentral(List<Integer> row) {
         for (int col = 4; col <= 7; col++) {
-            if (reserved[row][col]) {
+            if (row.contains(col)) {
                 return false;
             }
         }
