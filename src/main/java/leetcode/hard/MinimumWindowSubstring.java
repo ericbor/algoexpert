@@ -66,13 +66,13 @@ public class MinimumWindowSubstring {
         return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
     }
 
-    public String minWindow(String s, String t) {
-        if (s == null || s.isEmpty() || t == null || t.isEmpty()) {
+    public String minWindow(String s, String pattern) {
+        if (s == null || s.isEmpty() || pattern == null || pattern.isEmpty()) {
             return "";
         }
 
         int[] tMap = new int[128];
-        for (char c : t.toCharArray()) {
+        for (char c : pattern.toCharArray()) {
             tMap[c]++;
         }
 
@@ -93,7 +93,7 @@ public class MinimumWindowSubstring {
             }
 
 
-            while (matchCounter == t.length()) {
+            while (matchCounter == pattern.length()) {
                 if (end - start + 1 < minLength) {
                     minLength = end - start + 1;
                     minSubstring = s.substring(start, end + 1);
@@ -117,6 +117,11 @@ public class MinimumWindowSubstring {
 
     @Test
     public void test() {
+        Assert.assertEquals("BANC", minWindow("ADOBECODEBANC", "ABC"));
+    }
+
+    @Test
+    public void test4() {
         Assert.assertEquals("abba", minWindow("abba", "aba"));
     }
 
@@ -135,10 +140,7 @@ public class MinimumWindowSubstring {
         Assert.assertEquals("abc", minWindow("abc", "bca"));
     }
 
-    @Test
-    public void test4() {
-        Assert.assertEquals("BANC", minWindow("ADOBECODEBANC", "ABC"));
-    }
+
 
     @Test
     public void test2() {
