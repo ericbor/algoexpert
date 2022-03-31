@@ -4,9 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 //https://leetcode.com/problems/maximum-depth-of-binary-tree/
 public class MaximumDepth {
@@ -23,7 +21,7 @@ public class MaximumDepth {
     }
 
     public int maxDepthIterative(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
 
@@ -35,10 +33,10 @@ public class MaximumDepth {
 
         int depth = 0;
         int currentDepth = 0;
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             root = stack.pollLast();
             currentDepth = depths.pollLast();
-            if(root != null) {
+            if (root != null) {
                 depth = Math.max(depth, currentDepth);
 
                 stack.add(root.left);

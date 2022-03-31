@@ -5,7 +5,7 @@ import tree.design.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
-//https://leetcode.com/submissions/detail/582188726/
+//https://leetcode.com/problems/leaf-similar-trees/
 public class LeafSimilarTrees {
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         List<Integer> list1 = new ArrayList<>();

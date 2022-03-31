@@ -15,20 +15,18 @@ import java.util.Queue;
 public class MaximumDepthOfNarrayTree {
     public int maxDepth(Node root) {
         int maxDepth = 0;
-        if(root == null) {
+        if (root == null) {
             return maxDepth;
         }
 
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int levelSize = queue.size();
-            for(int i = 0; i < levelSize; i++) {
+            for (int i = 0; i < levelSize; i++) {
                 Node curr = queue.poll();
                 queue.addAll(curr.children);
-
-
             }
             maxDepth++;
         }
@@ -37,16 +35,16 @@ public class MaximumDepthOfNarrayTree {
     }
 
     public int maxDepthRec(Node root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
 
-        if(root.children.isEmpty()) {
+        if (root.children.isEmpty()) {
             return 1;
         }
 
         List<Integer> heights = new LinkedList<>();
-        for(Node node : root.children) {
+        for (Node node : root.children) {
             heights.add(maxDepthRec(node));
         }
 

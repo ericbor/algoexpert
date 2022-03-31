@@ -8,13 +8,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
 
-//https://leetcode.com/problems/merge-two-binary-trees/solution/
+//https://leetcode.com/problems/merge-two-binary-trees/
 public class Merge2BinaryTrees {
     public TreeNode mergeTreesRec(TreeNode root1, TreeNode root2) {
-        if(root1 == null) {
+        if (root1 == null) {
             return root2;
         }
-        if(root2 == null) {
+        if (root2 == null) {
             return root1;
         }
 
