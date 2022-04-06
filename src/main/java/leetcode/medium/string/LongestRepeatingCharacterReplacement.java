@@ -15,19 +15,19 @@ public class LongestRepeatingCharacterReplacement {
         int maxRepeat = 0;
         int maxLength = 0;
 
-        for (int end = 0; end < s.length(); end++) {
-            int currIdx = (int) s.charAt(end) - (int) 'A';
+        for (int i = 0; i < s.length(); i++) {
+            int currIdx = (int) s.charAt(i) - (int) 'A';
             hash[currIdx]++;
 
             maxRepeat = Math.max(maxRepeat, hash[currIdx]);//largest count of a single, unique character in the current window
 
             //there are more characters in the window than we can replace, shrink
-            while (end - start + 1 - maxRepeat > k) {
+            while (i - start + 1 - maxRepeat > k) {
                 hash[(int) s.charAt(start) - (int) 'A']--;
                 start++;
             }
 
-            maxLength = Math.max(maxLength, end - start + 1);
+            maxLength = Math.max(maxLength, i - start + 1);
         }
         return maxLength;
     }
@@ -40,7 +40,7 @@ public class LongestRepeatingCharacterReplacement {
     }
 
     @Test
-    public void test3() {
+    public void test() {
         Assert.assertEquals(4, characterReplacement("ABAB", 2));
     }
 }

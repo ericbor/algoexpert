@@ -69,7 +69,7 @@ public class MaximumWidthOfBinaryTree {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(3);
         root.left.left = new TreeNode(5);
-        root.left.right = new TreeNode(3);
+        root.right = new TreeNode(2);
 
         Assert.assertEquals(2, widthOfBinaryTree(root));
     }

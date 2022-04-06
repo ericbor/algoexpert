@@ -10,17 +10,30 @@ import java.util.List;
 //https://leetcode.com/problems/diameter-of-binary-tree/
 public class DiameterOfBinaryTree {
     private int diameter = 0;
-    private List<Integer> maxPath = new ArrayList<>();
 
     public int diameterOfBinaryTree(TreeNode root) {
-        List<Integer> path = new ArrayList<>();
-        path.add(root.val);
-
-        collectPaths(root, path);
-
+        diameter = 0;
+        longestPath(root);
         return diameter;
     }
 
+    private int longestPath(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        // recursively find the longest path in both left child and right child
+        int leftPath = longestPath(node.left);
+        int rightPath = longestPath(node.right);
+
+        // update the diameter if left_path plus right_path is larger
+        diameter = Math.max(diameter, leftPath + rightPath);
+
+        // return the longest one between left_path and right_path;
+        // remember to add 1 for the path connecting the node and its parent
+        return Math.max(leftPath, rightPath) + 1;
+    }
+
+    private List<Integer> maxPath = new ArrayList<>();
     private List<Integer> collectPaths(TreeNode node, List<Integer> parentPath) {
         if (node == null) {
             return new ArrayList<>();

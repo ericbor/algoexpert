@@ -54,7 +54,6 @@ public class VerticalOrderTraversalOfBinaryTree {
                 minColumn = Math.min(minColumn, currColumn);
             }
             row++;
-
         }
 
         List<List<Integer>> results = new ArrayList<>(columnValues.size());

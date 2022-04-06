@@ -12,11 +12,10 @@ import java.util.Map;
 //https://leetcode.com/problems/find-all-anagrams-in-a-string/
 public class FindAllAnagramsInString {
     public List<Integer> findAnagrams_2(String s, String p) {
-        int pLength = p.length();
 
-        char[] pArr = new char[26];
+        char[] pCount = new char[26];
         for (char c : p.toCharArray()) {
-            pArr[c - 'a']++;
+            pCount[(int) c - (int) 'a']++;
         }
 
         List<Integer> results = new ArrayList<>();
@@ -24,13 +23,13 @@ public class FindAllAnagramsInString {
         for (int i = 0; i <= s.length() - p.length(); i++) {
             if (p.indexOf(s.charAt(i)) != -1) {
                 char[] match = new char[26];
-                for (int j = i; j < i + pLength; j++) {
-                    match[s.charAt(j) - 'a']++;
+                for (int j = i; j < i + p.length(); j++) {
+                    match[(int) s.charAt(j) - (int) 'a']++;
                 }
 
                 boolean isMatch = true;
-                for (int k = 0; k < pArr.length; k++) {
-                    if (pArr[k] != match[k]) {
+                for (int k = 0; k < pCount.length; k++) {
+                    if (pCount[k] != match[k]) {
                         isMatch = false;
                         break;
                     }

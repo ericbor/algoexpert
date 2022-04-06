@@ -5,6 +5,7 @@ import org.junit.Test;
 import tree.design.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -94,7 +95,8 @@ public class AllNodesDistanceKInBinaryTree {
         int distance = k;
 
         while (distance > 0) {
-            for (int i = queue.size(); i > 0; i--) {
+            int levelSize = queue.size();
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode cur = queue.poll();
                 if (cur.left != null && !visited.contains(cur.left)) {
                     visited.add(cur.left);
@@ -124,6 +126,21 @@ public class AllNodesDistanceKInBinaryTree {
 
     @Test
     public void test() {
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(5);
+        root.left.left = new TreeNode(6);
+        root.left.right = new TreeNode(2);
+        root.left.right.left = new TreeNode(7);
+        root.left.right.right = new TreeNode(4);
+        root.right = new TreeNode(1);
+        root.right.left = new TreeNode(0);
+        root.right.right = new TreeNode(8);
+
+        Assert.assertEquals(Collections.emptyList(), distanceK(root, root.left, 4));
+    }
+
+    @Test
+    public void test4() {
         TreeNode root = new TreeNode(3);
         root.left = new TreeNode(5);
         root.left.left = new TreeNode(6);

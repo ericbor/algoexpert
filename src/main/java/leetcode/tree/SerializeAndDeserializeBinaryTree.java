@@ -8,10 +8,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+//https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
 public class SerializeAndDeserializeBinaryTree {
     // Encodes a tree to a single string.
     public String serialize_2(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return "";
         }
 
@@ -21,7 +22,7 @@ public class SerializeAndDeserializeBinaryTree {
 
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
-            if(node == null) {
+            if (node == null) {
                 sb.append("n").append(",");
             } else {
                 sb.append(node.val).append(",");
@@ -35,7 +36,7 @@ public class SerializeAndDeserializeBinaryTree {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize_2(String data) {
-        if(data.isEmpty()) {
+        if (data.isEmpty()) {
             return null;
         }
 
@@ -46,15 +47,15 @@ public class SerializeAndDeserializeBinaryTree {
         queue.add(root);
 
         int i = 1;
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode parent = queue.poll();
-            if(!"n".equals(values[i])) {
+            if (!"n".equals(values[i])) {
                 TreeNode left = new TreeNode(Integer.parseInt(values[i]));
                 parent.left = left;
                 queue.add(left);
             }
             i++;
-            if(!"n".equals(values[i])) {
+            if (!"n".equals(values[i])) {
                 TreeNode right = new TreeNode(Integer.parseInt(values[i]));
                 parent.right = right;
                 queue.add(right);
@@ -107,8 +108,8 @@ public class SerializeAndDeserializeBinaryTree {
         root.right.left = new TreeNode(4);
         root.right.right = new TreeNode(5);
 
-        String data = serialize(root);
-        TreeNode deserializedTree = deserialize(data);
+        String data = serialize_2(root);
+        TreeNode deserializedTree = deserialize_2(data);
 
         Assert.assertEquals(1, deserializedTree.val);
         Assert.assertEquals(2, deserializedTree.left.val);
