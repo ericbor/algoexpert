@@ -49,7 +49,6 @@ public class LongestPalindromicSubstring {
 
         for (int i = s.length() - 1; i >= 0; i--) {
             for (int j = i + 1; j < s.length(); j++) {
-
                 if (s.charAt(i) == s.charAt(j)) {
                     // if it's a two character string or if the remaining string is a palindrome too
                     if (j - i == 1 || dp[i + 1][j - 1]) {
@@ -63,7 +62,6 @@ public class LongestPalindromicSubstring {
                         }
                     }
                 }
-
             }
         }
 

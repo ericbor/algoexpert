@@ -9,7 +9,7 @@ import java.util.Queue;
 //https://leetcode.com/problems/number-of-islands/
 public class NumberOfIslands {
     public int numIslands2(char[][] grid) {
-        Queue<int[]> landCoordinates = new LinkedList<>();
+        Queue<int[]> queue = new LinkedList<>();
         boolean[][] seen = new boolean[grid.length][grid[0].length];
         int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
@@ -19,20 +19,18 @@ public class NumberOfIslands {
 
                 if (grid[row][col] == '1' && !seen[row][col]) {
                     seen[row][col] = true;
-                    landCoordinates.add(new int[] { row, col });
+                    queue.add(new int[] { row, col });
 
-                    while (!landCoordinates.isEmpty()) {
-                        int[] coordinates = landCoordinates.poll();
-                        int currRow = coordinates[0];
-                        int currCol = coordinates[1];
+                    while (!queue.isEmpty()) {
+                        int[] curr = queue.poll();
 
-                        for (int[] direction : directions) {
-                            int r = currRow + direction[0];
-                            int c = currCol + direction[1];
+                        for (int[] dir : directions) {
+                            int r = curr[0] + dir[0];
+                            int c = curr[1] + dir[1];
 
                             if (r >= 0 && c >= 0 && r < grid.length && c < grid[0].length && !seen[r][c] && grid[r][c] == '1') {
                                 seen[r][c] = true;
-                                landCoordinates.add(new int[] { r, c });
+                                queue.add(new int[] { r, c });
                             }
                         }
                     }
