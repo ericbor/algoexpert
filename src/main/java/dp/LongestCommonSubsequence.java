@@ -11,7 +11,6 @@ public class LongestCommonSubsequence {
 
         for (int row = 1; row < dp.length; row++) {
             for (int col = 1; col < dp[0].length; col++) {
-
                 if (text1.charAt(row - 1) == text2.charAt(col - 1)) {
                     dp[row][col] = 1 + dp[row - 1][col - 1];
                 } else {

@@ -5,15 +5,16 @@ import org.junit.Test;
 
 //https://leetcode.com/problems/word-search/
 public class WordSearch {
-    private boolean[][] visited;
+    //private boolean[][] visited;
 
     public boolean exist(char[][] board, String word) {
-        visited = new boolean[board.length][board[0].length];
+        //visited = new boolean[board.length][board[0].length];
 
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[0].length; col++) {
                 if (word.charAt(0) == board[row][col]) {
-                    if(search(row, col, board, word, 0)) {
+                    boolean[][] visited = new boolean[board.length][board[0].length];
+                    if(search(row, col, board, word, 0, visited)) {
                         return true;
                     }
                 }
@@ -23,7 +24,7 @@ public class WordSearch {
         return false;
     }
 
-    private boolean search(int row, int col, char[][] board, String word, int index) {
+    private boolean search(int row, int col, char[][] board, String word, int index, boolean[][] visited) {
         if (index == word.length()) {
             return true;
         }
@@ -33,10 +34,10 @@ public class WordSearch {
         }
 
         visited[row][col] = true;
-        if (search(row + 1, col, board, word, index + 1) ||
-            search(row, col + 1, board, word, index + 1) ||
-            search(row - 1, col, board, word, index + 1) ||
-            search(row, col - 1, board, word, index + 1)) {
+        if (search(row + 1, col, board, word, index + 1, visited) ||
+            search(row, col + 1, board, word, index + 1, visited) ||
+            search(row - 1, col, board, word, index + 1, visited) ||
+            search(row, col - 1, board, word, index + 1, visited)) {
             return true;
         }
 

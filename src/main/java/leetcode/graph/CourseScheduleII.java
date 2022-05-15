@@ -14,7 +14,6 @@ import java.util.Queue;
 public class CourseScheduleII {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> graph = new HashMap<>();
-
         for (int[] p : prerequisites) {
             graph.put(p[1], new ArrayList<>());
         }

@@ -16,14 +16,15 @@ public class EmployeeFreeTime {
         Queue<Interval> queue = new PriorityQueue<>((a, b) -> a.start - b.start);
         schedule.forEach(queue::addAll);
 
-        Interval temp = queue.poll();
+        Interval curr = queue.poll();
         List<Interval> result = new ArrayList<>();
         while (!queue.isEmpty()) {
-            if (temp.end < queue.peek().start) { // no intersect
-                result.add(new Interval(temp.end, queue.peek().start));
-                temp = queue.poll(); // becomes the next temp interval
-            } else { // intersect or sub merged
-                temp = temp.end < queue.peek().end ? queue.peek() : temp;
+            if (curr.end < queue.peek().start) { // no intersect
+                result.add(new Interval(curr.end, queue.peek().start));
+                curr = queue.poll(); // becomes the next curr interval
+            } else if (curr.end < queue.peek().end) { // intersect or sub merged
+                curr = queue.poll();
+            } else {
                 queue.poll();
             }
         }
