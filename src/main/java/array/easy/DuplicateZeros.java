@@ -14,7 +14,19 @@ public class DuplicateZeros {
                 i += 1;
             }
         }
+    }
 
+    public void duplicateZeros2(int[] arr) {
+        int possbileDups = 0;
+
+        for(int i = 0; i <= arr.length - 1 - possbileDups; i++) {
+            if(arr[i] == 0) {
+                if(i == arr.length - 1 - possbileDups) {
+                    arr[arr.length - 1] = 0;
+
+                }
+            }
+        }
     }
 
     @Test
