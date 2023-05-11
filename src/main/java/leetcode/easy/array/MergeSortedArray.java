@@ -6,20 +6,20 @@ import org.junit.Test;
 //https://leetcode.com/problems/merge-sorted-array/
 public class MergeSortedArray {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int p1 = m - 1;
-        int p2 = n - 1;
+        int tail1 = m - 1;
+        int tail2 = n - 1;
 
         for (int i = m + n - 1; i >= 0; i--) {
-            if(p2 < 0) {
+            if(tail2 < 0) {
                 break;
             }
 
-            if (p1 >= 0 &&  nums1[p1] >= nums2[p2]) {
-                nums1[i] = nums1[p1];
-                p1--;
+            if (tail1 >= 0 && nums1[tail1] >= nums2[tail2]) {
+                nums1[i] = nums1[tail1];
+                tail1--;
             } else {
-                nums1[i] = nums2[p2];
-                p2--;
+                nums1[i] = nums2[tail2];
+                tail2--;
             }
         }
     }

@@ -36,7 +36,7 @@ public class ProductOfArrayExceptSelf {
         }
 
         int suffixProduct = 1;
-        for(int i = nums.length - 1; i >= 0; i--) {
+        for (int i = nums.length - 1; i >= 0; i--) {
             results[i] *= suffixProduct;
             suffixProduct *= nums[i];
         }
@@ -46,11 +46,11 @@ public class ProductOfArrayExceptSelf {
 
     @Test
     public void test() {
-        Assert.assertArrayEquals(new int[] { 24, 12, 8, 6 }, productExceptSelf(new int[] { 1, 2, 3, 4 }));
+        Assert.assertArrayEquals(new int[]{24, 12, 8, 6}, productExceptSelf2(new int[]{1, 2, 3, 4}));
     }
 
     @Test
     public void test2() {
-        Assert.assertArrayEquals(new int[] { 0, 0, 9, 0, 0 }, productExceptSelf(new int[] { -1, 1, 0, -3, 3 }));
+        Assert.assertArrayEquals(new int[]{0, 0, 9, 0, 0}, productExceptSelf2(new int[]{-1, 1, 0, -3, 3}));
     }
 }

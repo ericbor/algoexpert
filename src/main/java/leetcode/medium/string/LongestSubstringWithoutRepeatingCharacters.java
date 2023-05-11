@@ -72,7 +72,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     @Test
     public void test() {
-        Assert.assertEquals(6, lengthOfLongestSubstring("asjrgapa"));
+        Assert.assertEquals(6, lengthOfLongestSubstring2("asjrgapa"));
     }
 
     @Test

@@ -23,6 +23,6 @@ public class MoveZerosToEnd {
 
     @Test
     public void verify() {
-        Assert.assertArrayEquals(new int[] { 1, 3, 12, 0, 0 }, moveZeroes(new int[] { 0, 1, 0, 3, 12 }));
+        Assert.assertArrayEquals(new int[]{1, 3, 12, 0, 0}, moveZeroes(new int[]{1, 0, 3, 0, 12}));
     }
 }
