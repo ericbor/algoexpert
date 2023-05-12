@@ -4,10 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import tree.design.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 //https://leetcode.com/problems/binary-tree-level-order-traversal/
 //Breadth First Search
@@ -44,26 +41,25 @@ public class LevelOrderTraversal {
 
     public List<List<Integer>> levelOrder_Iterative(TreeNode root) {
         List<List<Integer>> levels = new ArrayList<>();
-        LinkedList<TreeNode> queue = new LinkedList<>();
-
-        if (root != null) {
-            queue.add(root);
+        if(root == null) {
+            return levels;
         }
 
-        TreeNode current;
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            List<Integer> level = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
 
-            for (int i = 0; i < size; i++) {// traverse nodes in the same level
-                current = queue.pollFirst();
-                level.add(current.val);// visit the root
+        while(!queue.isEmpty()) {
+            int levelSize = queue.size();
+            List<Integer> level = new ArrayList<>(levelSize);
+            for(int i = 0; i < levelSize; i++) {
+                TreeNode curr = queue.poll();
+                level.add(curr.val);
 
-                if (current.left != null) {
-                    queue.add(current.left);// push left child to queue if it is not null
+                if(curr.left != null) {
+                    queue.add(curr.left);
                 }
-                if (current.right != null) {
-                    queue.add(current.right);// push right child to queue if it is not null
+                if(curr.right != null) {
+                    queue.add(curr.right);
                 }
             }
 
