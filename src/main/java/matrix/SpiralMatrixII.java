@@ -60,7 +60,6 @@ public class SpiralMatrixII {
         boolean[][] visited = new boolean[n][n];
         int[][] matrix = new int[n][n];
         int curr = 1;
-        int visitCount = 0;
         int r = 0;
         int c = -1;
 
@@ -73,7 +72,6 @@ public class SpiralMatrixII {
                     matrix[r][c] = curr;
                     curr++;
                     visited[r][c] = true;
-                    //visitCount++;
                 }
             }
         }
@@ -82,7 +80,7 @@ public class SpiralMatrixII {
     }
 
     public boolean isValid(int[][] ans, int x, int y) {
-        return (x >= 0 && x < ans.length && y >= 0 && y < ans[0].length);
+        return x >= 0 && x < ans.length && y >= 0 && y < ans[0].length;
     }
 
     @Test
