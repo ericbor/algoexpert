@@ -64,11 +64,11 @@ public class SnakesAndLadders {
 
     @Test
     public void test() {
-        Assert.assertEquals(4, snakesAndLadders(new int[][] { { -1, -1, -1, -1, -1, -1 }, { -1, -1, -1, -1, -1, -1 }, { -1, -1, -1, -1, -1, -1 }, { -1, 35, -1, -1, 13, -1 }, { -1, -1, -1, -1, -1, -1 }, { -1, 15, -1, -1, -1, -1 } }));
+        Assert.assertEquals(4, snakesAndLadders(new int[][]{{-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 35, -1, -1, 13, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 15, -1, -1, -1, -1}}));
     }
 
     @Test
     public void test2() {
-        Assert.assertEquals(1, snakesAndLadders(new int[][] { { -1, -1 }, { -1, 3 } }));
+        Assert.assertEquals(1, snakesAndLadders(new int[][]{{-1, -1}, {-1, 3}}));
     }
 }
