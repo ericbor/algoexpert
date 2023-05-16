@@ -16,7 +16,7 @@ public class TheMaze {
         boolean[][] visited = new boolean[maze.length][maze[0].length];
         visited[start[0]][start[1]] = true;
 
-        int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
         while (!queue.isEmpty()) {
             int[] curr = queue.poll();
@@ -26,20 +26,20 @@ public class TheMaze {
                 return true;
             }
 
-            for (int[] direction : directions) {
-                int r = currRow + direction[0];
-                int c = currCol + direction[1];
+            for (int[] dir : directions) {
+                int r = currRow;
+                int c = currCol;
 
-                while (r >= 0 && c >= 0 && r < maze.length && c < maze[0].length && maze[r][c] != 1) {
-                    r += direction[0];
-                    c += direction[1];
+                while (r + dir[0] >= 0 && c + dir[1] >= 0 && r + dir[0] < maze.length && c + dir[1] < maze[0].length && maze[r + dir[0]][c + dir[1]] != 1) {
+                    r += dir[0];
+                    c += dir[1];
                 }
 
-                int prevRow = r - direction[0];
-                int prevCol = c - direction[1];
-                if (!visited[prevRow][prevCol]) {
-                    queue.add(new int[] { prevRow, prevCol });
-                    visited[prevRow][prevCol] = true;
+                //int prevRow = r - dir[0];
+                //int prevCol = c - dir[1];
+                if (!visited[r][c]) {
+                    queue.add(new int[]{r, c});
+                    visited[r][c] = true;
                 }
             }
         }
@@ -49,16 +49,16 @@ public class TheMaze {
 
     @Test
     public void test() {
-        Assert.assertTrue(hasPath(new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0 }, { 1, 1, 0, 1, 1 }, { 0, 0, 0, 0, 0 } }, new int[] { 0, 4 }, new int[] { 4, 4 }));
+        Assert.assertTrue(hasPath(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{4, 4}));
     }
 
     @Test
     public void test2() {
-        Assert.assertFalse(hasPath(new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0 }, { 1, 1, 0, 1, 1 }, { 0, 0, 0, 0, 0 } }, new int[] { 0, 4 }, new int[] { 3, 2 }));
+        Assert.assertFalse(hasPath(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{3, 2}));
     }
 
     @Test
     public void test3() {
-        Assert.assertFalse(hasPath(new int[][] { { 0, 0, 0, 0, 0 }, { 1, 1, 0, 0, 1 }, { 0, 0, 0, 0, 0 }, { 0, 1, 0, 0, 1 }, { 0, 1, 0, 0, 0 } }, new int[] { 4, 3 }, new int[] { 0, 1 }));
+        Assert.assertFalse(hasPath(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{0, 1}));
     }
 }
