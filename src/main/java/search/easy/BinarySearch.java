@@ -3,23 +3,23 @@ package search.easy;
 import org.junit.Assert;
 import org.junit.Test;
 
+//https://leetcode.com/problems/binary-search
 public class BinarySearch {
     public static int binarySearch(int[] array, int target) {
-        int left = 0;
-        int right = array.length - 1;
+        int start = 0;
+        int end = array.length - 1;
 
-        while (left <= right) {
-            int middle = (left + right) / 2;
-            int potentialMatch = array[middle];
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
 
-            if (target == potentialMatch) {
-                return middle;
+            if (target == array[mid]) {
+                return mid;
             }
 
-            if (target < potentialMatch) {
-                right = middle - 1;
+            if (target < array[mid]) {
+                end = mid - 1;
             } else {
-                left = middle + 1;
+                start = mid + 1;
             }
         }
 

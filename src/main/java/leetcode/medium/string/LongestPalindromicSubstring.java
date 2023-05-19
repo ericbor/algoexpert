@@ -68,10 +68,35 @@ public class LongestPalindromicSubstring {
         return s.substring(start, end + 1);
     }
 
+    private int start = 0;
+    private int maxLength = 0;
+
+    public String longestPalindrome3(String s) {
+        for(int i = 0; i < s.length() - 1; i++) {
+            expand(s, i, i);
+            expand(s, i, i + 1);
+        }
+
+        return s.substring(start, start + maxLength);
+    }
+
+    private void expand(String s, int left, int right) {
+        while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+
+        if(right - left - 1 > maxLength) {
+            maxLength = right - left - 1;
+            start = left + 1;
+        }
+    }
+
     @Test
     public void test() {
         Assert.assertEquals("racecar", longestPalindrome("racecar"));
         Assert.assertEquals("racecar", longestPalindromeDP("racecar"));
+        Assert.assertEquals("racecar", longestPalindrome3("racecar"));
     }
 
     @Test
@@ -101,6 +126,7 @@ public class LongestPalindromicSubstring {
     @Test
     public void test8() {
         Assert.assertEquals("bb", longestPalindromeDP("cbbd"));
+        Assert.assertEquals("bb", longestPalindrome3("cbbd"));
     }
 
     @Test

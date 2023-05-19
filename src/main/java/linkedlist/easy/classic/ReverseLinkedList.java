@@ -1,26 +1,28 @@
 package linkedlist.easy.classic;
 
 import linkedlist.design.ListNode;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 //https://leetcode.com/problems/reverse-linked-list/
 public class ReverseLinkedList {
-
     public ListNode reverseList(ListNode head) {
-        if(head == null) {
-            return null;
-        }
-        ListNode currentHead = head;
-        while (head.next != null) {
-            ListNode p = head.next;
-            head.next = p.next;
-            p.next = currentHead;
-            currentHead = p;
+        if (head == null) {
+            return head;
         }
 
-        return currentHead;
+        ListNode before = null;
+        ListNode curr = head;
+        ListNode after = curr.next;
+
+        while (curr != null) { // (b)null  (c)1 -> (a)2 -> 3  --- null<-(b)1  (a)(c)2 -> 3
+            after = curr.next; // (b)null  (c)1 -> (a)2 -> 3 --- null<-(b)1  (c)2 -> (a)3
+            curr.next = before; // (b)null<-(c)1  (a)2 -> 3  --- null<-(b)1<-(c)2 (a)3
+            before = curr; // null<-(c)(b)1  (a)2 -> 3       --- null<-1<-(c)(b)2 (a)3
+            curr = after; // null<-(b)1  (a)(c)2 -> 3        --- null<-1<-(b)2 (a)(c)3
+        }
+
+        return before;
     }
 //current:  [1-2-3-4-5-null][2-3-4-5-null][3-4-5-null][4-5-null]  [5-null]      [null]
 //previous: [null]          [null-1]      [null-2-1]  [null-3-2-1][null-4-3-2-1][null-5-4-3-2-1]
@@ -34,10 +36,10 @@ public class ReverseLinkedList {
         head.next.next.next.next = new ListNode(5);
 
         ListNode result = reverseList(head);
-        assertEquals(5, result.val);
-        assertEquals(4, result.next.val);
-        assertEquals(3, result.next.next.val);
-        assertEquals(2, result.next.next.next.val);
-        assertEquals(1, result.next.next.next.next.val);
+        Assert.assertEquals(5, result.val);
+        Assert.assertEquals(4, result.next.val);
+        Assert.assertEquals(3, result.next.next.val);
+        Assert.assertEquals(2, result.next.next.next.val);
+        Assert.assertEquals(1, result.next.next.next.next.val);
     }
 }

@@ -14,9 +14,9 @@ public class ReverseLinkedListII {
 
         // Move the two pointers until they reach the proper starting point in the list.
         ListNode curr = head;
-        ListNode prev = null;
+        ListNode before = null;
         while (left > 1) {
-            prev = curr;
+            before = curr;
             curr = curr.next;
 
             left--;
@@ -24,25 +24,25 @@ public class ReverseLinkedListII {
         }
 
         // The two pointers that will fix the final connections.
-        ListNode con = prev;
+        ListNode con = before;
         ListNode tail = curr;
 
         // Iteratively reverse the nodes until n becomes 0.
         while (right > 0) {
-            ListNode nextTmp = curr.next;
-            curr.next = prev;
+            ListNode after = curr.next;
+            curr.next = before;
 
-            prev = curr;
-            curr = nextTmp;
+            before = curr;
+            curr = after;
 
             right--;
         }
 
         // Adjust the final connections as explained in the algorithm
         if (con != null) {
-            con.next = prev;
+            con.next = before;
         } else {
-            head = prev;//when right = 1
+            head = before;//when right = 1
         }
 
         tail.next = curr;
