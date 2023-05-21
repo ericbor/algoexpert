@@ -1,9 +1,8 @@
 package linkedlist.easy.classic;
 
 import linkedlist.design.ListNode;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 //https://leetcode.com/problems/merge-two-sorted-lists/solution/
 public class MergeTwoSortedLists {
@@ -55,11 +54,11 @@ public class MergeTwoSortedLists {
         l2.next.next = new ListNode(6);
 
         ListNode result = mergeTwoLists(l1, l2);
-        assertEquals(1, result.val);
-        assertEquals(2, result.next.val);
-        assertEquals(3, result.next.next.val);
-        assertEquals(4, result.next.next.next.val);
-        assertEquals(5, result.next.next.next.next.val);
-        assertEquals(6, result.next.next.next.next.next.val);
+        Assert.assertEquals(1, result.val);
+        Assert.assertEquals(2, result.next.val);
+        Assert.assertEquals(3, result.next.next.val);
+        Assert.assertEquals(4, result.next.next.next.val);
+        Assert.assertEquals(5, result.next.next.next.next.val);
+        Assert.assertEquals(6, result.next.next.next.next.next.val);
     }
 }

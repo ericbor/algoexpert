@@ -26,11 +26,11 @@ public class ReverseNodesInKGroup {
             ListNode curr = pointer.next;
 
             for (int i = 0; i < k; i++) {
-                ListNode nextTmp = curr.next;
+                ListNode after = curr.next;
                 curr.next = prev;
 
                 prev = curr;
-                curr = nextTmp;
+                curr = after;
             }
             //connection
             ListNode tail = pointer.next;
