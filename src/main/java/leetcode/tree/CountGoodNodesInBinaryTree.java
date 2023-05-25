@@ -17,7 +17,7 @@ public class CountGoodNodesInBinaryTree {
     }
 
     private void dfs(TreeNode node, int maxSoFar) {
-        if (maxSoFar <= node.val) {
+        if (node.val >= maxSoFar) {
             numGoodNodes++;
         }
 

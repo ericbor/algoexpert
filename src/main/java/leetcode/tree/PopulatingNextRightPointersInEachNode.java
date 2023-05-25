@@ -9,29 +9,22 @@ import java.util.Queue;
 //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
 public class PopulatingNextRightPointersInEachNode {
     public Node connect(Node root) {
-        if (root == null) {
-            return null;
-        }
-
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-            for (int i = 0; i < levelSize; i++) {
-                Node node = queue.poll();
-
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node curr = queue.poll();
+                if (i < size - 1) {
+                    curr.next = queue.peek();
                 }
 
-                if (i == levelSize - 1) {
-                    node.next = null;
-                } else {
-                    node.next = queue.peek();
+                if (curr.left != null) {
+                    queue.add(curr.left);
+                }
+                if (curr.right != null) {
+                    queue.add(curr.right);
                 }
             }
         }
@@ -72,4 +65,6 @@ public class PopulatingNextRightPointersInEachNode {
             next = null;
         }
     }
+
+
 }

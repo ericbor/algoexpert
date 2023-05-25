@@ -3,15 +3,10 @@ package leetcode.hard;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 //https://leetcode.com/problems/sliding-window-maximum/
 public class SlidingWindowMaximum {
-
     public int[] maxSlidingWindow2(int[] nums, int k) {
         Queue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
         int start = 0;
@@ -34,30 +29,34 @@ public class SlidingWindowMaximum {
     }
 
     public int[] maxSlidingWindow(int[] nums, int k) {
-        // assume nums is not null
-        if (nums.length == 0 || k == 0) {
+        if (nums == null || k <= 0) {
             return new int[0];
         }
 
-        int[] result = new int[nums.length - k + 1]; // number of windows
-        Deque<Integer> win = new ArrayDeque<>(); // stores indices
+        int[] results = new int[nums.length - k + 1];
+        int ri = 0;
+        // store index
+        Deque<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < nums.length; i++) {
+            // remove numbers out of range k
+            int range = i - k + 1;
+            while (!queue.isEmpty() && queue.peek() < range) {
+                queue.poll();
+            }
+            // remove smaller numbers in k range as they are useless
+            while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
+                queue.pollLast();
+            }
 
-        for (int i = 0; i < nums.length; ++i) {
-            // remove indices that are out of bound
-            while (!win.isEmpty() && nums[i] >= nums[win.peekLast()]) {
-                win.removeLast();
-            }
-            win.addLast(i);
-            // remove first element if it's outside the window
-            if (win.peekFirst() == i - k) {
-                win.pollFirst();
-            }
-            // add to result
+            // queue contains index... results contains content
+            queue.add(i);
             if (i >= k - 1) {
-                result[i - k + 1] = nums[win.peekFirst()];
+                results[ri] = nums[queue.peek()];
+                ri++;
             }
         }
-        return result;
+
+        return results;
     }
 
     @Test

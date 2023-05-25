@@ -22,10 +22,11 @@ public class LetterCombinationsOfPhoneNumber {
 
         for (int i = 0; i < digits.length(); i++) {
             int x = (int) digits.charAt(i) - (int) '0';
+            char[] arr = mapping[x].toCharArray();
 
             while (results.peek().length() == i) {
                 String t = results.poll();
-                for (char c : mapping[x].toCharArray()) {
+                for (char c : arr) {
                     results.add(t + c);
                 }
             }

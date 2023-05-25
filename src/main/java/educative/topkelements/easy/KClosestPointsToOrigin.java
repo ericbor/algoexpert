@@ -27,14 +27,11 @@ public class KClosestPointsToOrigin {
 
         Queue<Point> maxHeap = new PriorityQueue<>((p1, p2) -> p2.distFromOrigin() - p1.distFromOrigin());
 
-        for (int i = 0; i < k; i++) {
-            maxHeap.add(points[i]);
-        }
+        for (Point point : points) {
+            maxHeap.add(point);
 
-        for (int j = k; j < points.length; j++) {
-            if (points[j].distFromOrigin() < maxHeap.peek().distFromOrigin()) {
+            if (maxHeap.size() > k) {
                 maxHeap.poll();
-                maxHeap.add(points[j]);
             }
         }
 
@@ -43,12 +40,12 @@ public class KClosestPointsToOrigin {
 
     @Test
     public void main() {
-        Assert.assertEquals(List.of(new Point(1, 2)), findClosestPoints(new Point[] { new Point(1, 2), new Point(1, 3) }, 1));
+        Assert.assertEquals(List.of(new Point(1, 2)), findClosestPoints(new Point[]{new Point(1, 2), new Point(1, 3)}, 1));
     }
 
     @Test
     public void main2() {
-        Assert.assertEquals(List.of(new Point(1, 3), new Point(2, -1)), findClosestPoints(new Point[] { new Point(1, 3), new Point(3, 4), new Point(2, -1) }, 2));
+        Assert.assertEquals(List.of(new Point(1, 3), new Point(2, -1)), findClosestPoints(new Point[]{new Point(1, 3), new Point(3, 4), new Point(2, -1)}, 2));
     }
 }
 
@@ -66,7 +63,8 @@ class Point {
         return (x * x) + (y * y);
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -75,7 +73,8 @@ class Point {
         return x == point.x && y == point.y;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(x, y);
     }
 }

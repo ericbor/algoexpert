@@ -18,7 +18,7 @@ public class BasicCalculatorII {
         for (int i = 0; i < s.length(); i++) {
             char currentChar = s.charAt(i);
             if (Character.isDigit(currentChar)) {
-                currentNumber = (int) currentChar - (int) '0';
+                currentNumber = (currentNumber * 10) + (currentChar - '0');
             }
             if (!Character.isDigit(currentChar) && !Character.isWhitespace(currentChar) || i == s.length() - 1) {
                 if (operation == '-') {
@@ -45,7 +45,7 @@ public class BasicCalculatorII {
 
     @Test
     public void test() {
-        Assert.assertEquals(7, calculate("3+2*2"));
+        Assert.assertEquals(42, calculate("38+2*2"));
     }
 
     @Test
