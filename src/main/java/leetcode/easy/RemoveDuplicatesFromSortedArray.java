@@ -6,30 +6,21 @@ import org.junit.Test;
 //https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 public class RemoveDuplicatesFromSortedArray {
     public int removeDuplicates(int[] nums) {
-
-        int nextNonDuplicate = 1; // index of the next non-duplicate element
+        int insertIndex = 1;
         for (int i = 1; i < nums.length; i++) {
-            int previousNum = nums[nextNonDuplicate - 1];
-            int currentNum = nums[i];
-
-            if (previousNum != currentNum) {
-                //swap
-                nums[nextNonDuplicate] = nums[i];
-                nextNonDuplicate++;
+            // We skip to next index if we see a duplicate element
+            if (nums[i - 1] != nums[i]) {
+                /* Storing the unique element at insertIndex index and incrementing
+                   the insertIndex by 1 */
+                nums[insertIndex] = nums[i];
+                insertIndex++;
             }
         }
-
-        return nextNonDuplicate;
-    }
-
-    private void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+        return insertIndex;
     }
 
     @Test
     public void test() {
-        Assert.assertEquals(5, removeDuplicates(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }));
+        Assert.assertEquals(5, removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
     }
 }

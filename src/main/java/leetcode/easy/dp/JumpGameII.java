@@ -3,6 +3,9 @@ package leetcode.easy.dp;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 //https://leetcode.com/problems/jump-game-ii/
 public class JumpGameII {
     public int jump(int[] nums) {
@@ -23,9 +26,46 @@ public class JumpGameII {
         return dp[nums.length - 1];
     }
 
+    public int jump2(int[] nums) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        boolean[] visited = new boolean[nums.length];
+        visited[0] = true;
+
+        int minJumps = 0;
+
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                int currIndex = queue.poll();
+
+                if(currIndex == nums.length - 1) {
+                    return minJumps;
+                }
+
+                int jumps = nums[currIndex];
+                int nextIndex = currIndex;
+                while(jumps > 0 && nextIndex < nums.length) {
+                    nextIndex++;
+                    if(nextIndex < nums.length && !visited[nextIndex]) {
+                        queue.add(nextIndex);
+                        visited[nextIndex] = true;
+                    }
+                    jumps--;
+                }
+            }
+            minJumps++;
+
+        }
+
+        return minJumps;
+
+    }
+
     @Test
     public void test() {
         Assert.assertEquals(4, jump(new int[] { 1, 1, 3, 6, 9, 3, 0, 1, 3 }));
+        Assert.assertEquals(4, jump2(new int[] { 1, 1, 3, 6, 9, 3, 0, 1, 3 }));
     }
 
     @Test

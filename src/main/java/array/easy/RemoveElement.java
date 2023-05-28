@@ -42,7 +42,7 @@ public class RemoveElement {
         //Assert.assertEquals(0, removeElement(new int[] { 3 }, 3));
 
         //Assert.assertEquals(2, removeElement2(new int[] { 3,2,2,3 }, 3));
-        Assert.assertEquals(5, removeElement2(new int[] { 0,1,2,2,3,0,4,2 }, 2));
+        Assert.assertEquals(5, removeElement(new int[] { 0,1,2,2,3,0,4,2 }, 2));
         //Assert.assertEquals(0, removeElement2(new int[] { 3 }, 3));
     }
 }
