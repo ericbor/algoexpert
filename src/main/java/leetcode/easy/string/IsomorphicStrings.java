@@ -15,26 +15,24 @@ import java.util.Set;
 public class IsomorphicStrings {
 
     public boolean isIsomorphic2(String s, String t) {
-        Map<Character, Integer> sMap = new HashMap<>();
-        for (char c : s.toCharArray()) {
-            sMap.put(c, sMap.getOrDefault(c, 0) + 1);
-        }
 
-        Map<Character, Integer> tMap = new HashMap<>();
-        for (char c : t.toCharArray()) {
-            tMap.put(c, tMap.getOrDefault(c, 0) + 1);
-        }
+        int[] sHash = new int[256];
 
-        Queue<Map.Entry<Character, Integer>> sMaxHeap = new PriorityQueue<>((e1, e2) -> e2.getValue() - e1.getValue());
-        sMaxHeap.addAll(sMap.entrySet());
+        int[] tHash = new int[256];
 
-        Queue<Map.Entry<Character, Integer>> tMaxHeap = new PriorityQueue<>((e1, e2) -> e2.getValue() - e1.getValue());
-        tMaxHeap.addAll(tMap.entrySet());
+        for (int i = 0; i < s.length(); ++i) {
+            char sChar = s.charAt(i);
+            char tChar = t.charAt(i);
 
-        while (!sMaxHeap.isEmpty() && !tMaxHeap.isEmpty()) {
-            int sSize = sMaxHeap.poll().getValue();
-            int tSize = tMaxHeap.poll().getValue();
-            if (sSize != tSize) {
+            // Case 1: No mapping exists in either of the dictionaries
+            if (sHash[sChar] == 0 && tHash[tChar] == 0) {
+                sHash[sChar] = tChar;
+                tHash[tChar] = sChar;
+            }
+
+            // Case 2: Ether mapping doesn't exist in one of the dictionaries or Mapping exists and
+            // it doesn't match in either of the dictionaries or both
+            else if (!(sHash[sChar] == tChar && tHash[tChar] == sChar)) {
                 return false;
             }
         }
@@ -70,20 +68,24 @@ public class IsomorphicStrings {
     @Test
     public void test() {
         Assert.assertFalse(isIsomorphic("bbbaaaba", "aaabbbba"));
+        Assert.assertFalse(isIsomorphic2("bbbaaaba", "aaabbbba"));
     }
 
     @Test
     public void test2() {
         Assert.assertTrue(isIsomorphic("egg", "add"));
+        Assert.assertTrue(isIsomorphic2("egg", "add"));
     }
 
     @Test
     public void test3() {
         Assert.assertTrue(isIsomorphic("paper", "title"));
+        Assert.assertTrue(isIsomorphic2("paper", "title"));
     }
 
     @Test
     public void test4() {
         Assert.assertFalse(isIsomorphic("foo", "bar"));
+        Assert.assertFalse(isIsomorphic2("foo", "bar"));
     }
 }
