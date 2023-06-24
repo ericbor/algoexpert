@@ -10,13 +10,13 @@ public class AddTwoNumbers {
         ListNode sentinel = new ListNode(0);
         ListNode curr = sentinel;
 
-        int carry = 0;
+        int reminder = 0;
         while(l1 != null || l2 != null) {
             int x = l1 != null ? l1.val : 0;
             int y = l2 != null ? l2.val : 0;
 
-            int sum = carry + x + y;
-            carry = sum / 10;
+            int sum = reminder + x + y;
+            reminder = sum / 10;
             int val = sum % 10;
 
             curr.next = new ListNode(val);
@@ -30,8 +30,8 @@ public class AddTwoNumbers {
             }
         }
 
-        if(carry > 0) {
-            curr.next = new ListNode(carry);
+        if(reminder > 0) {
+            curr.next = new ListNode(reminder);
         }
 
         return sentinel.next;

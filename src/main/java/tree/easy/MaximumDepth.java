@@ -8,8 +8,27 @@ import java.util.LinkedList;
 
 //https://leetcode.com/problems/maximum-depth-of-binary-tree/
 public class MaximumDepth {
-    //DFS
+    int maxDepth = 0;
+
     public int maxDepth(TreeNode root) {
+        dfs(root, 1);
+        return maxDepth;
+    }
+
+    private void dfs(TreeNode node, int currDepth) {
+        if(node == null) {
+            return;
+        }
+        if(node.left == null && node.right == null) {
+            maxDepth = Math.max(maxDepth, currDepth);
+        } else {
+            dfs(node.left, currDepth + 1);
+            dfs(node.right, currDepth + 1);
+        }
+    }
+
+    //DFS
+    public int maxDepth2(TreeNode root) {
         if (root == null) {
             return 0;
         }

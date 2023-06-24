@@ -53,14 +53,45 @@ public class ConstructBinaryTreeFromPreorderAndInorder {
         return root;
     }
 
+    private int preorderIndex;
+    private Map<Integer, Integer> inorderIndexMap;
+    public TreeNode buildTree2(int[] preorder, int[] inorder) {
+        preorderIndex = 0;
+        // build a hashmap to store value -> its index relations
+        inorderIndexMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            inorderIndexMap.put(inorder[i], i);
+        }
+
+        return arrayToTree(preorder, 0, preorder.length - 1);
+    }
+
+    private TreeNode arrayToTree(int[] preorder, int left, int right) {
+        // if there are no elements to construct the tree
+        if (left > right) {
+            return null;
+        }
+
+        // select the preorder_index element as the root and increment it
+        int rootValue = preorder[preorderIndex];
+        preorderIndex++;
+        TreeNode root = new TreeNode(rootValue);
+
+        // build left and right subtree
+        // excluding inorderIndexMap[rootValue] element because it's the root
+        root.left = arrayToTree(preorder, left, inorderIndexMap.get(rootValue) - 1);
+        root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue) + 1, right);
+        return root;
+    }
+
     @Test
     public void test() {
-        TreeNode root = buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
+        TreeNode root = buildTree2(new int[]{3,9,1,2, 20,15,7}, new int[]{1,9,2,3,15,20,7});
 
         Assert.assertEquals(3, root.val);
         Assert.assertEquals(9, root.left.val);
-        Assert.assertNull(root.left.left);
-        Assert.assertNull(root.left.right);
+        Assert.assertEquals(1, root.left.left.val);
+        Assert.assertEquals(2, root.left.right.val);
         Assert.assertEquals(20, root.right.val);
         Assert.assertEquals(15, root.right.left.val);
         Assert.assertEquals(7, root.right.right.val);
