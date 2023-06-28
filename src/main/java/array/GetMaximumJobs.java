@@ -8,39 +8,30 @@ import org.junit.Test;
 public class GetMaximumJobs {
     public int getMaximumJobs(int n, int m, int k) {
         int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = 1; // Fill the array with 1's first
-        }
-        int sum = n;
-        int maxjob = 1;                 // With all 1's, the sum is n and maxjob is 1
+        int jobsLeft = m;
+        int maxJobs = 0;
 
-        while (sum <= m) {
-            // Increase the kth item by 1; this increased value is now maxjob
-            arr[k]++;
-            maxjob = arr[k];
-            // Make sure difference between elements (on left of kth element) is 1 or less (for balanced schedule)
-            // If the difference is more than 1, increase element so that difference is 1
-            for (int i = k - 1; i >= 0; i--) {
-                if ((arr[i + 1] - arr[i]) > 1) {
+        while (jobsLeft > 0) {
+            arr[k - 1]++;//1,2,4,2,1
+            maxJobs = arr[k - 1];//4
+            jobsLeft--;//1
+
+            for (int i = k - 2; i >= 0; i--) {
+                if (arr[i + 1] - arr[i] > 1 && jobsLeft > 0) {
                     arr[i]++;
-                }
-            }
-            // Do same thing for elements to the right of kth element
-            for (int i = k + 1; i < n; i++) {
-                if ((arr[i - 1] - arr[i]) > 1) {
-                    arr[i]++;
+                    jobsLeft--;
                 }
             }
 
-            // Find the new sum of all elements again
-            sum = 0;
-            for (int i = 0; i < n; i++) {
-                sum += arr[i];
+            for (int i = k; i < n; i++) {
+                if (arr[i - 1] - arr[i] > 1 && jobsLeft > 0) {
+                    arr[i]++;
+                    jobsLeft--;
+                }
             }
         }
-        // When we reach here, the sum of the elements is > m, so maxjob is one value too high
-        // decrement maxjob and return it
-        return maxjob - 1;
+
+        return maxJobs - 1;
     }
 
 
@@ -57,6 +48,11 @@ public class GetMaximumJobs {
     @Test
     public void test3() {
         Assert.assertEquals(4, getMaximumJobs(5, 16, 2));
+    }
+
+    @Test
+    public void test4() {
+        Assert.assertEquals(2, getMaximumJobs(5, 5, 3));
     }
 
 }

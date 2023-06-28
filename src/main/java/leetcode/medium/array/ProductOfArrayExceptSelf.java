@@ -7,21 +7,21 @@ import org.junit.Test;
 public class ProductOfArrayExceptSelf {
     public int[] productExceptSelf2(int[] nums) {
 
-        int[] prefixProduct = new int[nums.length];
-        prefixProduct[0] = 1;
+        int[] prefix = new int[nums.length];
+        prefix[0] = 1;
         for (int i = 1; i < nums.length; i++) {
-            prefixProduct[i] = nums[i - 1] * prefixProduct[i - 1];
+            prefix[i] = nums[i - 1] * prefix[i - 1];
         }
 
-        int[] suffixProduct = new int[nums.length];
-        suffixProduct[suffixProduct.length - 1] = 1;
+        int[] suffix = new int[nums.length];
+        suffix[suffix.length - 1] = 1;
         for (int i = nums.length - 2; i >= 0; i--) {
-            suffixProduct[i] = nums[i + 1] * suffixProduct[i + 1];
+            suffix[i] = nums[i + 1] * suffix[i + 1];
         }
 
         int[] results = new int[nums.length];
         for (int i = 0; i < nums.length; i++) {
-            results[i] = prefixProduct[i] * suffixProduct[i];
+            results[i] = prefix[i] * suffix[i];
         }
 
         return results;
