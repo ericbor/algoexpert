@@ -6,7 +6,7 @@ import org.junit.Test;
 //https://leetcode.com/problems/armstrong-number/
 public class ArmstrongNumber {
     public boolean isArmstrong(int n) {
-        if(n < 10) {
+        if (n < 10) {
             return true;
         }
 
@@ -14,7 +14,7 @@ public class ArmstrongNumber {
 
         int num = n;
         int sum = 0;
-        while(num > 0) {
+        while (num > 0) {
             int reminder = num % 10;
 
             sum += (int) Math.pow(reminder, power);
