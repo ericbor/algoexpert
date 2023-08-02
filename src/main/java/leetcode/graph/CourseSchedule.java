@@ -14,6 +14,7 @@ import java.util.Queue;
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> graph = new HashMap<>();
+
         for (int[] p : prerequisites) {
             graph.put(p[0], new ArrayList<>());
         }

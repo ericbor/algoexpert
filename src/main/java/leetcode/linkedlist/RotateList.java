@@ -14,11 +14,11 @@ public class RotateList {
             return head;
         }
 
-        ListNode sentinel = new ListNode(Integer.MIN_VALUE);
-        sentinel.next = head;
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        dummy.next = head;
 
-        ListNode slow = sentinel;
-        ListNode fast = sentinel;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
 
         int size = 0;
         while (fast.next != null) {   // fast REACH tail && Count size
@@ -33,11 +33,11 @@ public class RotateList {
         }
 
         // CONNECT
-        fast.next = sentinel.next;
-        sentinel.next = slow.next;
+        fast.next = dummy.next;
+        dummy.next = slow.next;
         slow.next = null;
 
-        return sentinel.next;
+        return dummy.next;
     }
 
     @Test

@@ -29,14 +29,13 @@ public class NumberOfProvinces {
         while(!queue.isEmpty()) {
             int curr = queue.poll();
 
-            if(visited[curr]) {
-                continue;
-            }
+            if(!visited[curr]) {
+                visited[curr] = true;
 
-            visited[curr] = true;
-            for(int j = 0; j < isConnected[curr].length; j++) {
-                if(curr != j && isConnected[curr][j] > 0) {
-                    queue.add(j);
+                for(int j = 0; j < isConnected[curr].length; j++) {
+                    if(curr != j && isConnected[curr][j] > 0) {
+                        queue.add(j);
+                    }
                 }
             }
         }

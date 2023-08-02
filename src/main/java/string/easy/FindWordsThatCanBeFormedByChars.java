@@ -69,6 +69,39 @@ public class FindWordsThatCanBeFormedByChars {
         return totalResult;
     }
 
+    public int countCharactersNew(String[] words, String chars) {
+        int[] hash = new int[26];
+        for(char c: chars.toCharArray()) {
+            hash[(int)c - (int)'a']++;
+        }
+
+        int results = 0;
+        for(String word: words) {
+            if(isGood(word, hash)) {
+                results += word.length();
+            }
+        }
+
+        return results;
+    }
+
+    private boolean isGood(String word, int[] hash) {
+        int[] wordHash = new int[26];
+        for(char c: word.toCharArray()) {
+            wordHash[(int)c - (int)'a']++;
+        }
+
+        for(int i = 0; i < wordHash.length; i++) {
+            if(wordHash[i] > 0) {
+                if(wordHash[i] < hash[i]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     @Test
     public void verify() {
         //Assert.assertEquals(6, countCharacters(new String[] { "cat", "bt", "hat", "tree" }, "atach"));
@@ -76,6 +109,9 @@ public class FindWordsThatCanBeFormedByChars {
 
         Assert.assertEquals(6, countCharacters2(new String[] { "cat", "bt", "hat", "tree" }, "atach"));
         Assert.assertEquals(10, countCharacters2(new String[] { "hello", "world", "leetcode" }, "welldonehoneyr"));
+
+        Assert.assertEquals(10, countCharactersNew(new String[] { "hello", "world", "leetcode" }, "welldonehoneyr"));
+
     }
 
 }
