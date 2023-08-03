@@ -18,15 +18,15 @@ public class LetterCombinationsOfPhoneNumber {
 
         Queue<String> results = new LinkedList<>();
         results.add("");
-        String[] mapping = { "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        String[] map = { "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
 
         for (int i = 0; i < digits.length(); i++) {
             int x = (int) digits.charAt(i) - (int) '0';
-            char[] arr = mapping[x].toCharArray();
+            String mapping = map[x];
 
             while (results.peek().length() == i) {
                 String t = results.poll();
-                for (char c : arr) {
+                for (char c : mapping.toCharArray()) {
                     results.add(t + c);
                 }
             }

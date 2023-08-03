@@ -36,7 +36,7 @@ public class LRUCache3 {
             } else {
                 //q.size() == capacity
                 map.remove(queue.poll());//removing the least recently used key
-                queue.add(key);//qppending the new key to the queue
+                queue.add(key);//appending the new key to the queue
             }
             map.put(key, value);//putting the key value pair
         }

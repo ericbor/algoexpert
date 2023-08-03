@@ -24,7 +24,7 @@ public class TechChallenge2 {
             return sb.toString();
         }
 
-
+        return null;
     }
 
     private void build(StringBuilder sb, int aCount, int bCount, String a, String b) {

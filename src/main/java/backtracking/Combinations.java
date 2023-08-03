@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 //https://leetcode.com/problems/combinations
@@ -22,11 +20,11 @@ public class Combinations {
             return;
         }
 
-        int need = k - curr.size();
-        int remain = n - firstNum + 1;
-        int available = remain - need;
+        //int need = k - curr.size();
+        //int remain = n - firstNum + 1;
+        //int available = remain - need;
 
-        for (int num = firstNum; num <= firstNum + available; num++) {
+        for (int num = firstNum; num <= n; num++) {
             curr.add(num);
             backtrack(curr, num + 1, ans, n, k);
             curr.remove(curr.size() - 1);
