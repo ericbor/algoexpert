@@ -26,6 +26,11 @@ public class SubarraySumEqualsK {
     }
 
     @Test
+    public void test3() {
+        Assert.assertEquals(4, subarraySum(new int[]{3, 4, 7, 2, -3, 1, 4, 2}, 7));
+    }
+
+    @Test
     public void test() {
         Assert.assertEquals(1, subarraySum(new int[]{-1, -1, 1}, 0));
     }

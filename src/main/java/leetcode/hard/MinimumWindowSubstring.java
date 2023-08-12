@@ -66,13 +66,13 @@ public class MinimumWindowSubstring {
         return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
     }
 
-    public String minWindow(String s, String pattern) {
-        if (s == null || s.isEmpty() || pattern == null || pattern.isEmpty()) {
+    public String minWindow(String s, String t) {
+        if (s == null || s.isEmpty() || t == null || t.isEmpty()) {
             return "";
         }
 
         int[] tMap = new int[128];
-        for (char c : pattern.toCharArray()) {
+        for (char c : t.toCharArray()) {
             tMap[c]++;
         }
 
@@ -93,7 +93,7 @@ public class MinimumWindowSubstring {
             }
 
 
-            while (matchCounter == pattern.length()) {
+            while (matchCounter == t.length()) {
                 if (end - start + 1 < minLength) {
                     minLength = end - start + 1;
                     minSubstring = s.substring(start, end + 1);

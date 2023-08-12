@@ -3,7 +3,7 @@ package array.easy;
 import org.junit.Assert;
 import org.junit.Test;
 
-//https://leetcode.com/problems/best-time-to-buy-and-sell-stock/solution/
+//https://leetcode.com/problems/best-time-to-buy-and-sell-stock
 public class BuySellStock2 {
     public int maxProfit(int[] prices) {
         int minPrice = Integer.MAX_VALUE;

@@ -45,42 +45,43 @@ public class PermutationInString {
         return hash;
     }
 
-    public boolean checkInclusion_2(String pattern, String s) {
-        Map<Character, Integer> map = new HashMap<>();
-        for (char chr : pattern.toCharArray()) {
-            map.put(chr, map.getOrDefault(chr, 0) + 1);
+    public boolean checkInclusion_2(String s1, String s2) {
+        if (s1.length() > s2.length()) {
+            return false;
+        }
+        int[] s1count = new int[26];
+        int[] s2count = new int[26];
+        //int k = s1.length();
+        for (int i = 0; i < s1.length(); i++) {
+            s1count[s1.charAt(i) - 'a']++;
+            s2count[s2.charAt(i) - 'a']++;
+        }
+        if (matches(s1count, s2count)) {
+            return true;
         }
 
-        int start = 0;
-        int matched = 0;
+        int front = 0;
+        int back = s1.length();
+        while (back < s2.length()) {
+            s1count[s2.charAt(front) - 'a']--;
+            s2count[s2.charAt(back) - 'a']++;
 
-        for (int i = 0; i < s.length(); i++) {
-            char rightChar = s.charAt(i);
-            if (map.containsKey(rightChar)) {
-                map.put(rightChar, map.get(rightChar) - 1);
-                if (map.get(rightChar) == 0) {
-                    matched++;
-                }
-            }
-
-            if (matched == map.size()) {
+            if (matches(s1count, s2count)) {
                 return true;
             }
-
-            if (i >= pattern.length() - 1) { // shrink the window by one character
-                char leftChar = s.charAt(start);
-                start++;
-                if (map.containsKey(leftChar)) {
-                    if (map.get(leftChar) == 0) {
-                        matched--; // before putting the character back, decrement the matched count
-                    }
-                    // put the character back for matching
-                    map.put(leftChar, map.get(leftChar) + 1);
-                }
-            }
+            front++;
+            back++;
         }
 
-        return false;
+        return matches(s1count, s2count);
+    }
+
+    public boolean matches(int[] s1count, int[] s2count) {
+        for (int i = 0; i < 26; i++) {
+            if (s1count[i] != s2count[i])
+                return false;
+        }
+        return true;
     }
 
     @Test
@@ -88,6 +89,7 @@ public class PermutationInString {
         Assert.assertFalse(checkInclusion("hello", "ooolleoooleh"));
         Assert.assertFalse(checkInclusion_2("hello", "ooolleoooleh"));
     }
+
     @Test
     public void test3() {
         Assert.assertTrue(checkInclusion("ab", "eidbaooo"));
