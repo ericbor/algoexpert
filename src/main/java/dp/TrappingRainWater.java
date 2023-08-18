@@ -92,6 +92,6 @@ public class TrappingRainWater {
 
     @Test
     public void test2() {
-        Assert.assertEquals(9, trap(new int[] { 4, 2, 0, 3, 2, 5 }));
+        Assert.assertEquals(9, trap2(new int[] { 4, 2, 0, 3, 2, 5 }));
     }
 }
