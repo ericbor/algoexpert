@@ -10,19 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-//https://leetcode.com/problems/word-break-ii/discuss/194615/DP-solution-with-detailed-text-and-video-explanation
+//https://leetcode.com/problems/word-break-ii
 public class WordBreakII {
     public List<String> wordBreak(String s, List<String> wordDict) {
         Set<String> set = new HashSet<>(wordDict);
 
-        int n = s.length();
-
         Map<Integer, Set<String>> map = new HashMap<>();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < s.length(); i++) {
             map.put(i, new HashSet<>());
         }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < s.length(); i++) {
             // find all sentence can be made up by substring s[i]
             // s[i] = substring s[0:j] workBreak + word in wordDict || s[i] is a word in wordDict
             // map[i] = map[i - 1] each in set + word
@@ -42,7 +40,7 @@ public class WordBreakII {
             }
         }
 
-        return new ArrayList<>(map.get(n - 1));
+        return new ArrayList<>(map.get(s.length() - 1));
     }
 
     @Test

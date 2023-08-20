@@ -7,36 +7,37 @@ import java.util.*;
 
 //https://leetcode.com/problems/maximum-frequency-stack
 public class FreqStack {
-    Map<Integer, Integer> freq;
-    Map<Integer, Deque<Integer>> group;
+    private final Map<Integer, Integer> valToFreq;
+    private final Map<Integer, Deque<Integer>> freqToVal;
     int maxfreq;
 
     public FreqStack() {
-        freq = new HashMap();
-        group = new HashMap();
+        valToFreq = new HashMap<>();
+        freqToVal = new HashMap<>();
         maxfreq = 0;
     }
 
-    public void push(int x) {
-        int f = freq.getOrDefault(x, 0) + 1;
-        freq.put(x, f);
-        if (f > maxfreq) {
-            maxfreq = f;
+    public void push(int val) {
+        int freq = valToFreq.getOrDefault(val, 0) + 1;
+        valToFreq.put(val, freq);
+        if (freq > maxfreq) {
+            maxfreq = freq;
         }
 
-        if(!group.containsKey(f)) {
-            group.put(f, new ArrayDeque<>());
+        if(!freqToVal.containsKey(freq)) {
+            freqToVal.put(freq, new ArrayDeque<>());
         }
-        group.get(f).push(x);
+        freqToVal.get(freq).push(val);
     }
 
     public int pop() {
-        int x = group.get(maxfreq).pop();
-        freq.put(x, freq.get(x) - 1);
-        if (group.get(maxfreq).isEmpty()) {
+        int val = freqToVal.get(maxfreq).pop();
+        valToFreq.put(val, valToFreq.get(val) - 1);
+        if (freqToVal.get(maxfreq).isEmpty()) {
             maxfreq--;
         }
-        return x;
+
+        return val;
     }
 
     @Test

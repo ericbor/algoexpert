@@ -14,17 +14,15 @@ import java.util.Queue;
 //https://leetcode.com/problems/path-sum-ii/
 public class PathSumII {
 
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> pathsList = new ArrayList<>();
-        List<Integer> pathNodes = new ArrayList<>();
+    List<List<Integer>> pathsList = new ArrayList<>();
 
-        recurseTree(root, sum, pathNodes, pathsList);
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        recurseTree(root, sum, new ArrayList<>());
 
         return pathsList;
     }
 
-    private void recurseTree(TreeNode node, int remainingSum, List<Integer> pathNodes, List<List<Integer>> pathsList) {
-
+    private void recurseTree(TreeNode node, int remainingSum, List<Integer> pathNodes) {
         if (node == null) {
             return;
         }
@@ -40,8 +38,8 @@ public class PathSumII {
         } else {
 
             // Else, we will recurse on the left and the right children
-            this.recurseTree(node.left, remainingSum - node.val, pathNodes, pathsList);
-            this.recurseTree(node.right, remainingSum - node.val, pathNodes, pathsList);
+            this.recurseTree(node.left, remainingSum - node.val, pathNodes);
+            this.recurseTree(node.right, remainingSum - node.val, pathNodes);
         }
 
         // We need to pop the node once we are done processing ALL of it's subtrees.

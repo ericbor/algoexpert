@@ -6,7 +6,6 @@ import tree.design.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
 //https://leetcode.com/problems/merge-two-binary-trees/
 public class Merge2BinaryTrees {
@@ -35,22 +34,24 @@ public class Merge2BinaryTrees {
 
         while (!stack.isEmpty()) {
             TreeNode[] curr = stack.pop();
-            if (curr[0] == null || curr[1] == null) {
+            TreeNode a = curr[0];
+            TreeNode b = curr[1];
+            if (a == null || b == null) {
                 continue;
             }
 
-            curr[0].val += curr[1].val;
+            a.val += b.val;
 
-            if (curr[0].left == null) {
-                curr[0].left = curr[1].left;
+            if (a.left == null) {
+                a.left = b.left;
             } else {
-                stack.push(new TreeNode[] { curr[0].left, curr[1].left });
+                stack.push(new TreeNode[] { a.left, b.left });
             }
 
-            if (curr[0].right == null) {
-                curr[0].right = curr[1].right;
+            if (a.right == null) {
+                a.right = b.right;
             } else {
-                stack.push(new TreeNode[] { curr[0].right, curr[1].right });
+                stack.push(new TreeNode[] { a.right, b.right });
             }
         }
 
