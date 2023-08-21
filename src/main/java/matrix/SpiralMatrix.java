@@ -10,38 +10,39 @@ import java.util.List;
 public class SpiralMatrix {
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
-        int up = 0;
-        int left = 0;
-        int right = matrix[0].length - 1;
-        int down = matrix.length - 1;
+        int rowBegin = 0;
+        int rowEnd = matrix.length-1;
+        int colBegin = 0;
+        int colEnd = matrix[0].length - 1;
 
         while (result.size() < matrix.length * matrix[0].length) {
-            // Traverse from left to right.
-            for (int col = left; col <= right; col++) {
-                result.add(matrix[up][col]);
+            // Traverse Right
+            for (int j = colBegin; j <= colEnd; j ++) {
+                result.add(matrix[rowBegin][j]);
             }
-            // Traverse downwards.
-            for (int row = up + 1; row <= down; row++) {
-                result.add(matrix[row][right]);
+            rowBegin++;
+
+            // Traverse Down
+            for (int j = rowBegin; j <= rowEnd; j ++) {
+                result.add(matrix[j][colEnd]);
             }
-            // Make sure we are now on a different row.
-            if (up != down) {
-                // Traverse from right to left.
-                for (int col = right - 1; col >= left; col--) {
-                    result.add(matrix[down][col]);
+            colEnd--;
+
+            if (rowBegin <= rowEnd) {
+                // Traverse Left
+                for (int j = colEnd; j >= colBegin; j --) {
+                    result.add(matrix[rowEnd][j]);
                 }
             }
-            // Make sure we are now on a different column.
-            if (left != right) {
-                // Traverse upwards.
-                for (int row = down - 1; row > up; row--) {
-                    result.add(matrix[row][left]);
+            rowEnd--;
+
+            if (colBegin <= colEnd) {
+                // Traver Up
+                for (int j = rowEnd; j >= rowBegin; j --) {
+                    result.add(matrix[j][colBegin]);
                 }
             }
-            left++;
-            right--;
-            up++;
-            down--;
+            colBegin ++;
         }
 
         return result;

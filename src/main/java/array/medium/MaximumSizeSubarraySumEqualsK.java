@@ -12,7 +12,7 @@ public class MaximumSizeSubarraySumEqualsK {
         int prefixSum = 0;
         int longestSubarray = 0;
 
-        Map<Integer, Integer> indices = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             prefixSum += nums[i];
 
@@ -23,14 +23,15 @@ public class MaximumSizeSubarraySumEqualsK {
 
             // If any subarray seen so far sums to k, then
             // update the length of the longest_subarray.
-            if (indices.containsKey(prefixSum - k)) {
-                longestSubarray = Math.max(longestSubarray, i - indices.get(prefixSum - k));
+            int key = prefixSum - k;
+            if (map.containsKey(key)) {
+                longestSubarray = Math.max(longestSubarray, i - map.get(key));
             }
 
             // Only add the current prefix_sum index pair to the
             // map if the prefix_sum is not already in the map.
-            if (!indices.containsKey(prefixSum)) {
-                indices.put(prefixSum, i);
+            if (!map.containsKey(prefixSum)) {
+                map.put(prefixSum, i);
             }
         }
 

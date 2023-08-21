@@ -4,29 +4,29 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class MedianFinder {
-    private final Queue<Integer> minHeap;
-    private final Queue<Integer> maxHeap;
+    private final Queue<Integer> min;
+    private final Queue<Integer> max;
 
     public MedianFinder() {
-        minHeap = new PriorityQueue<>();
-        maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        min = new PriorityQueue<>();
+        max = new PriorityQueue<>((a, b) -> b - a);
     }
 
     public void addNum(int num) {
-        if (minHeap.size() == maxHeap.size()) {
-            maxHeap.add(num);
-            minHeap.add(maxHeap.poll());
+        if (min.size() == max.size()) {
+            max.add(num);
+            min.add(max.poll());
         } else {
-            minHeap.add(num);
-            maxHeap.add(minHeap.poll());
+            min.add(num);
+            max.add(min.poll());
         }
     }
 
     public double findMedian() {
-        if (minHeap.size() > maxHeap.size()) {
-            return minHeap.peek();
+        if (min.size() > max.size()) {
+            return min.peek();
         }
 
-        return ((double) maxHeap.peek() + minHeap.peek()) / 2;
+        return ((double) max.peek() + min.peek()) / 2;
     }
 }
