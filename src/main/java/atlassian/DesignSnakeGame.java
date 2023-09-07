@@ -52,7 +52,7 @@ public class DesignSnakeGame {
 
     public static void main(String[] args) {
 
-/*        DesignSnakeGame snakeGame6 = new DesignSnakeGame(2, 2, new int[][]{{1, 1}, {0, 0}});
+        DesignSnakeGame snakeGame6 = new DesignSnakeGame(2, 2, new int[][]{{1, 1}, {0, 0}});
         Assert.assertEquals(0, snakeGame6.move("R"));
         Assert.assertEquals(1, snakeGame6.move("D"));
         Assert.assertEquals(1, snakeGame6.move("L"));
@@ -86,7 +86,7 @@ public class DesignSnakeGame {
 
         DesignSnakeGame snakeGame4 = new DesignSnakeGame(2, 1, new int[][]{{0, 1}});
         Assert.assertEquals(1, snakeGame4.move("R"));
-        Assert.assertEquals(-1, snakeGame4.move("R"));*/
+        Assert.assertEquals(-1, snakeGame4.move("R"));
 
         DesignSnakeGame snakeGame8 = new DesignSnakeGame(2, 2, new int[][]{{0, 1}, {1, 1}, {1, 0}, {0, 0}});
         Assert.assertEquals(1, snakeGame8.move("R"));
