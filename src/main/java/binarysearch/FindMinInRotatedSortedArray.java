@@ -1,4 +1,4 @@
-package leetcode.medium.array;
+package binarysearch;
 
 import org.junit.Assert;
 import org.junit.Test;

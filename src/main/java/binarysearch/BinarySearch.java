@@ -1,4 +1,4 @@
-package search.easy;
+package binarysearch;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,6 +24,26 @@ public class BinarySearch {
         }
 
         return -1;
+    }
+
+    public int search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;  // Avoid potential overflow
+            if (nums[mid] >= target) {
+                end = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        if (start < nums.length && nums[start] == target) {  // Additional check for bounds
+            return start;
+        } else {
+            return -1;
+        }
     }
 
     public static int binarySearchRecursive(int[] array, int target) {
@@ -52,6 +72,7 @@ public class BinarySearch {
     public void verify() {
         Assert.assertEquals(3, binarySearch(new int[] { 0, 1, 21, 33, 45, 45, 61, 71, 72, 73 }, 33));
         Assert.assertEquals(3, binarySearchRecursive(new int[] { 0, 1, 21, 33, 45, 45, 61, 71, 72, 73 }, 33));
+        Assert.assertEquals(3, search(new int[] { 0, 1, 21, 33, 45, 45, 61, 71, 72, 73 }, 33));
     }
 
     @Test

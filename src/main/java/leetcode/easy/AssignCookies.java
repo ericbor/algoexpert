@@ -3,7 +3,10 @@ package leetcode.easy;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.Set;
 
 //https://leetcode.com/problems/assign-cookies/
 public class AssignCookies {
@@ -25,6 +28,36 @@ public class AssignCookies {
         }
 
         return counter;
+    }
+
+    private Set<String> operators = Set.of("+", "-", "*", "/");
+
+    public int evalRPN(String[] tokens) {
+
+        Deque<Integer> stack = new ArrayDeque<>();
+        //int result = 0;
+        for(String token: tokens) {
+            if(operators.contains(token)) {
+                int num1 = stack.pop();
+                int num2 = stack.pop();
+                int currResult = 0;
+                if(token == "/") {
+                    currResult = num2 / num1;
+                } else if(token == "*") {
+                    currResult = num2 * num1;
+                } else if(token == "+") {
+                    currResult = num2 + num1;
+                } else if(token == "-") {
+                    currResult = num2 - num1;
+                }
+                stack.push(currResult);
+            } else {
+                stack.push(Integer.parseInt(token));
+            }
+        }
+
+        return stack.peek();
+
     }
 
     @Test

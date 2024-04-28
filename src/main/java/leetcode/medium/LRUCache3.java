@@ -1,5 +1,7 @@
 package leetcode.medium;
 
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -41,4 +43,18 @@ public class LRUCache3 {
             map.put(key, value);//putting the key value pair
         }
     }
+
+
+	public static void main(String[] args) {
+			LRUCache3 cache = new LRUCache3(3);
+			cache.put(111, 1); // cache is {1=1}
+			cache.put(222, 2); // cache is {1=1, 2=2}
+			cache.get(111);    // return 1
+			cache.put(333, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+			cache.get(222);    // returns -1 (not found)
+			cache.put(444, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+			cache.get(111);    // return -1 (not found)
+			cache.get(333);    // return 3
+			cache.get(444);    // return 4
+		}
 }

@@ -4,7 +4,7 @@ import linkedlist.design.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
-//https://leetcode.com/problems/merge-two-sorted-lists/solution/
+//https://leetcode.com/problems/merge-two-sorted-lists
 public class MergeTwoSortedLists {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         // maintain an unchanging reference to node ahead of the return node.
