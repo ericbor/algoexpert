@@ -1,5 +1,8 @@
 package array.medium;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,5 +37,10 @@ public class LongestSubstringWithAtMostKDistinctChars {
         }
 
         return maxSubstring;
+    }
+
+    @Test
+    public void test() {
+        Assert.assertEquals(3, lengthOfLongestSubstringKDistinct("eceba", 2));
     }
 }
